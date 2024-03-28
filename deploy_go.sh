@@ -11,6 +11,8 @@ if ! command -v go &>/dev/null; then
     echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >>$HOME/.bash_profile
     source $HOME/.bash_profile
     go version
+    
+    rm go1.21.4.linux-amd64.tar.gz
 else
     echo "Go 已经安装"
 fi
