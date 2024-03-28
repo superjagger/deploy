@@ -23,3 +23,5 @@ go build -o build/eigenlayer cmd/eigenlayer/main.go
 cp ./build/eigenlayer /usr/local/bin/
 cd $HOME
 rm -rf eigenlayer-cli
+
+eigenlayer
