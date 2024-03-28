@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $HOME/.bash_profile
+
 # 系统：Debian
 # docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
 
