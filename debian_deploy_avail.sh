@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 环境：
-# 执行命令：
+# 系统：Debian
+# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_avail.sh | bash
 
 echo "----------------------------- 安装开始 -----------------------------"
 
