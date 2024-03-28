@@ -1,4 +1,8 @@
 #!/bin/bash
+source $HOME/.bash_profile
+
+# 系统：Debian
+# go 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go.sh | bash
 
 if ! command -v go &>/dev/null; then
     echo "Go 未安装"
