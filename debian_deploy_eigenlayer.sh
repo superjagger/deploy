@@ -24,4 +24,8 @@ cp ./build/eigenlayer /usr/local/bin/
 cd $HOME
 rm -rf eigenlayer-cli
 
+rm -rf eigenlayer_file
+rm -rf eigenLayer_file
+rm -rf *.ecdsa.key.json
+rm -rf *.yml
 eigenlayer
