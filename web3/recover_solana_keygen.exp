@@ -1,0 +1,17 @@
+#!/usr/bin/expect
+
+# 导入助记词到 solana cli 中
+# 使用方法: expect recover_solana_keygen.exp "助记词"
+
+# 设置超时时间
+# set timeout 10 
+
+# 助记词
+set phrase [lindex $argv 0]
+
+
+spawn solana-keygen recover -f
+expect {
+	"*seed phrase:" { send "yes\r"; exp_continue }
+	"*Continue? (y/n): " { send "y\r"}
+}
