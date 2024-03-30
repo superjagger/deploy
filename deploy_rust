@@ -1,9 +1,0 @@
-#!/bin/bash
-
-source $HOME/.bash_profile
-
-# rust 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
-
-if ! command -v docker &>/dev/null; then
-
-fi
