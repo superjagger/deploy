@@ -15,9 +15,5 @@ expect {
 	"*seed phrase:" { send "${phrase}\r"; exp_continue }
 	"*press ENTER to continue:" { send "\r"; exp_continue }
 	"*Continue? (y/n): " { send "y\r"; exp_continue }
-	"*to /root/.config/solana/id.json" { send_user "成功导入" }
-}
-
-expect {
-	"*#": { send_user "结束"}
+	"*to /root/.config/solana/id.json" { send_user "成功导入\n" }
 }
