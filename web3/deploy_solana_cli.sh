@@ -7,6 +7,12 @@ source $HOME/.bash_profile
 if ! command -v solana &>/dev/null; then
     echo "solana cli 未安装"
     
+    # 安装 rust
+    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_rust.sh | bash
+    
+    # 安装 Node.js
+    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_node.sh | bash
+    
     # 部署Solana CLI 
     sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
     
