@@ -17,3 +17,7 @@ expect {
 	"*Continue? (y/n): " { send "y\r"; exp_continue }
 	"*to /root/.config/solana/id.json" { send_user "成功导入" }
 }
+
+expect {
+	"*#": { send_user "结束"}
+}
