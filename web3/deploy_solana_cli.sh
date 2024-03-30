@@ -2,7 +2,7 @@
 
 source $HOME/.bash_profile
 
-# solana cli 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_solana_cli.sh | bash
+# solana cli 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_solana_cli.sh | bash
 
 if ! command -v solana &>/dev/null; then
     echo "solana cli 未安装"
