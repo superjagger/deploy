@@ -12,6 +12,6 @@ set phrase [lindex $argv 0]
 
 spawn solana-keygen recover -f
 expect {
-	"*seed phrase:" { send "yes\r"; exp_continue }
+	"*seed phrase:" { send "${phrase}\r"; exp_continue }
 	"*Continue? (y/n): " { send "y\r"}
 }
