@@ -9,8 +9,14 @@
 # 助记词
 set phrase [lindex $argv 0]
 
+# solana 一个私钥地址可以延伸出多个公钥地址，其中常用的钱包phantom使用延伸词：m/44'/501'/0'/0'
+# 如果不写就是ASK原始的老钱包，此时使用助记词导入phantom钱包会发现钱包地址与 solana address 查询到的地址不一样
+# 如果想要 solana cli 和 phantom钱包使用的地址保持一致就加上参数: "prompt://?full-path=m/44'/501'/0'/0'"
+# 例如：solana-keygen recover -f "prompt://?full-path=m/44'/501'/0'/0'"
+# 参考资料: https://nick.af/articles/derive-solana-addresses
+set prompt [lindex $argv 1]
 
-spawn solana-keygen recover -f "prompt://?full-path=m/44'/501'/0'/0'"
+spawn solana-keygen recover -f $prompt
 expect {
 	"*seed phrase:" { send "${phrase}\r"; exp_continue }
 	"*press ENTER to continue:" { send "\r"; exp_continue }
