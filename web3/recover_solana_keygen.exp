@@ -10,7 +10,7 @@
 set phrase [lindex $argv 0]
 
 
-spawn solana-keygen recover -f
+spawn solana-keygen recover -f "prompt://?full-path=m/44'/501'/0'/0'"
 expect {
 	"*seed phrase:" { send "${phrase}\r"; exp_continue }
 	"*press ENTER to continue:" { send "\r"; exp_continue }
