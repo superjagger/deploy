@@ -16,9 +16,9 @@ set phrase [lindex $argv 0]
 # 参考资料: https://nick.af/articles/derive-solana-addresses
 set prompt [lindex $argv 1]
 
-if [ -z "$prompt" ]; then  
-    prompt=ASK
-fi
+if { [string length "$prompt"] == 0 } {
+    set prompt ASK
+}
 
 spawn solana-keygen recover -f $prompt
 expect {
