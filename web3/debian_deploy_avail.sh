@@ -60,9 +60,9 @@ last_public_key=""
 log_content=$(journalctl -u availd.service -n 300 | grep "Avail ss58 address") # 请将 your_logfile.log 替换为你的日志文件路径  
   
 # 使用正则表达式匹配并提取信息  
-while [[ $log_content =~ Avail ss58 address: ([^,]*),.*(public key: [a-fA-F0-9]*) ]]; do  
-    ss58_address=${BASH_REMATCH[1]}  
-    public_key=${BASH_REMATCH[2]}  
+while [[ $log_content =~ (Avail ss58 address: )([^ ,]*)(.*)(public key: )([a-fA-F0-9]*) ]]; do  
+    ss58_address=${BASH_REMATCH[2]}  
+    public_key=${BASH_REMATCH[5]}  
   
     # 更新变量为最新匹配的内容  
     last_ss58_address=$ss58_address  
@@ -75,7 +75,6 @@ done
 # 输出最后匹配到的内容  
 echo "Last ss58 address: $last_ss58_address"  
 echo "Last public key: $last_public_key"
-
 
 # journalctl -u availd | grep address
 echo ====================================== 助记词文件：${identity_file} =========================================
