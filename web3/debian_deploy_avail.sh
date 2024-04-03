@@ -72,12 +72,10 @@ while [[ $log_content =~ (Avail ss58 address: )([^ ,]*)(.*)(public key: )([a-fA-
     log_content=${log_content#*${BASH_REMATCH[0]}}  
 done  
   
-# 输出最后匹配到的内容  
-echo "Last ss58 address: $last_ss58_address"  
-echo "Last public key: $last_public_key"
+phrase=$(cat identity.toml | grep 'avail_secret_seed_phrase' | sed -n 's/.*avail_secret_seed_phrase = '\''\(.*[^\\]\)'\''.*/\1/p')
 
 # journalctl -u availd | grep address
 echo ====================================== 助记词文件：${identity_file} =========================================
-cat ${identity_file}
+echo "${phrase},${last_ss58_address},${public_key}" > ${INSTALL_DIR}/file.csv
 # 完成安装提示
 echo ====================================== 安装完成 =========================================
