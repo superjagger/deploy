@@ -16,7 +16,6 @@ apt install -y curl make clang pkg-config libssl-dev build-essential
 
 # 设置安装目录和发布 URL
 INSTALL_DIR="${HOME}/avail"
-RELEASE_URL="https://github.com/availproject/avail-light/releases/download/v1.7.9/avail-light-linux-amd64.tar.gz"
 
 # 助记词存储路径
 identity_file="/root/avail/identity.toml"
