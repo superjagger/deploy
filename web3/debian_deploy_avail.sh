@@ -51,7 +51,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable availd
 sudo systemctl start availd.service
 
-sleep 3
+sleep 5
 # 初始化变量  
 last_ss58_address=""  
 last_public_key=""  
