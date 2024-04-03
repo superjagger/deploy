@@ -5,9 +5,10 @@
 
 echo "----------------------------- 安装开始 -----------------------------"
 
-# 删除原有节点
+# 暂停原有节点
 sudo systemctl stop availd
 sudo systemctl disable availd
+rm /etc/systemd/system/availd.service
 
 # 安装必要的依赖项
 apt update -y
