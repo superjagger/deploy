@@ -52,6 +52,7 @@ sudo systemctl enable availd
 sudo systemctl start availd.service
 
 sleep 5
+echo "获取节点信息"
 # 初始化变量  
 last_ss58_address=""  
 last_public_key=""  
