@@ -10,6 +10,9 @@ sudo systemctl stop availd
 sudo systemctl disable availd
 rm /etc/systemd/system/availd.service
 
+# 关闭防火墙
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
+
 # 安装必要的依赖项
 apt update -y
 apt install -y curl make clang pkg-config libssl-dev build-essential
