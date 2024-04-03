@@ -51,6 +51,32 @@ sudo systemctl daemon-reload
 sudo systemctl enable availd
 sudo systemctl start availd.service
 
+# 获取节点公钥和节点钱包
+# 初始化变量  
+last_ss58_address=""  
+last_public_key=""  
+  
+# 假设日志内容存储在变量 log_content 中  
+log_content=$(journalctl -u availd.service -n 300 | grep "Avail ss58 address") # 请将 your_logfile.log 替换为你的日志文件路径  
+  
+# 使用正则表达式匹配并提取信息  
+while [[ $log_content =~ Avail ss58 address: ([^,]*),.*(public key: [a-fA-F0-9]*) ]]; do  
+    ss58_address=${BASH_REMATCH[1]}  
+    public_key=${BASH_REMATCH[2]}  
+  
+    # 更新变量为最新匹配的内容  
+    last_ss58_address=$ss58_address  
+    last_public_key=$public_key  
+  
+    # 移除已匹配的内容，继续查找剩余内容  
+    log_content=${log_content#*${BASH_REMATCH[0]}}  
+done  
+  
+# 输出最后匹配到的内容  
+echo "Last ss58 address: $last_ss58_address"  
+echo "Last public key: $last_public_key"
+
+
 # journalctl -u availd | grep address
 echo ====================================== 助记词文件：${identity_file} =========================================
 cat ${identity_file}
