@@ -17,18 +17,16 @@ apt install -y curl make clang pkg-config libssl-dev build-essential
 INSTALL_DIR="${HOME}/avail"
 RELEASE_URL="https://github.com/availproject/avail-light/releases/download/v1.7.9/avail-light-linux-amd64.tar.gz"
 
-identity_file=/root/avail/identity.toml
+# 助记词存储路径
+identity_file="/root/avail/identity.toml"
 
 # 创建安装目录并进入
-rm -rf "$INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
-# 下载并解压发布包
-wget "$RELEASE_URL" >/dev/null 2>&1
-tar -xvzf avail-light-linux-amd64.tar.gz >/dev/null 2>&1
-rm avail-light-linux-amd64.tar.gz
-mv avail-light-linux-amd64 avail-light
+avail_sh_url="https://raw.githubusercontent.com/availproject/availup/main/availup.sh"
+run_avail_node="curl -sL1 ${avail_sh_url} | bash -s -- --identity ${identity_file} --upgrade y"
+
 
 # 配置 systemd 服务文件
 tee /etc/systemd/system/availd.service >/dev/null <<EOF
@@ -38,7 +36,7 @@ After=network.target
 StartLimitIntervalSec=0
 [Service]
 User=root
-ExecStart=/root/avail/avail-light --network goldberg --identity ${identity_file}
+ExecStart=${run_avail_node}
 Restart=always
 RestartSec=120
 [Install]
