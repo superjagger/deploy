@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ORE 挖矿脚本，执行命令: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_deploy_ore.sh | bash
+# ORE 挖矿脚本，执行命令: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
 # 部署 solana cli
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_solana_cli.sh | bash
