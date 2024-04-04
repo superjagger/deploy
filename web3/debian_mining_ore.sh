@@ -17,7 +17,7 @@ fi
 # 安装ore挖矿程序
 # curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
-# source $HOME/.bash_profile
+source $HOME/.bash_profile
 
 # 下载助记词导入脚本
 # curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/recover_solana_keygen.exp
