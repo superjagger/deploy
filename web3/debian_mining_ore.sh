@@ -20,6 +20,7 @@ fi
 # 安装ore挖矿程序
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
+source $HOME/.bash_profile
 
 # 导入 solana 钱包作为挖矿钱包
 expect recover_solana_keygen.exp "$phrase" "prompt://?full-path=m/44'/501'/0'/0'"
