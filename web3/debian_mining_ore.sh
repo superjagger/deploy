@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# ore 挖矿脚本: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_mining_ore.sh | bash
-
-# 安装ore挖矿程序
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
+# ore 挖矿脚本: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_mining_ore.sh | bash -s -- "你的助记词"
 
 # 安装 expect
 apt-get install expect
@@ -18,6 +15,10 @@ if [ -z "$phrase" ]; then
     echo "缺少参数: phrase"
     exit 1
 fi
+
+
+# 安装ore挖矿程序
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
 
 # 导入 solana 钱包作为挖矿钱包
