@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -f "$HOME/.bash_profile" ]; then
+    echo "$HOME/.bash_profile 文件不存在自动创建"
+    touch $HOME/.bash_profile
+fi
+
 source $HOME/.bash_profile
 
 # rust 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_rust.sh | bash
