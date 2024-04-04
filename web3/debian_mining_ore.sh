@@ -30,4 +30,4 @@ rm -rf recover_solana_keygen.exp
 echo "钱包地址: $(solana address)"
 
 # 后台挖矿，写了个死循环一直尝试挖矿
-nohup bash -c 'while true; do ore --rpc https://api.mainnet-beta.solana.com --keypair ~/.config/solana/id.json --priority-fee 1 mine --threads 4; done' > mining_ore_output.log 2>&1 &
+nohup bash -c 'while true; do ore --rpc https://api.mainnet-beta.solana.com --keypair ~/.config/solana/id.json --priority-fee 1 mine --threads 4; done' >> mining_ore_output.log 2>&1 &
