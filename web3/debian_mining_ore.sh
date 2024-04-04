@@ -2,12 +2,6 @@
 
 # ore 挖矿脚本: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_mining_ore.sh | bash -s -- "你的助记词"
 
-# 安装 expect
-apt-get install expect
-
-# 下载助记词导入脚本
-curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/recover_solana_keygen.exp
-
 # 挖矿钱包助记词
 phrase=$1
 
@@ -17,13 +11,23 @@ if [ -z "$phrase" ]; then
 fi
 
 
+# 安装 expect
+apt-get install expect
+
 # 安装ore挖矿程序
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
 source $HOME/.bash_profile
 
+# 下载助记词导入脚本
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/recover_solana_keygen.exp
+
 # 导入 solana 钱包作为挖矿钱包
 expect recover_solana_keygen.exp "$phrase" "prompt://?full-path=m/44'/501'/0'/0'"
+rm -rf recover_solana_keygen.exp
+
+# 钱包地址
+echo "钱包地址: $(solana address)"
 
 # 后台挖矿
 nohup ore --rpc https://api.mainnet-beta.solana.com --keypair ~/.config/solana/id.json --priority-fee 1 mine --threads 4 >output.log 2>&1 &
