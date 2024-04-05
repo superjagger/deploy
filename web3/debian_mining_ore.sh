@@ -12,19 +12,19 @@ fi
 
 
 # 安装 expect
-# apt-get install expect
+apt-get install expect
 
 # 安装ore挖矿程序
-# curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_ore.sh | bash
 
 source $HOME/.bash_profile
 
 # 下载助记词导入脚本
-# curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/recover_solana_keygen.exp
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/recover_solana_keygen.exp
 
 # 导入 solana 钱包作为挖矿钱包
-# expect recover_solana_keygen.exp "$phrase" "prompt://?full-path=m/44'/501'/0'/0'"
-# rm -rf recover_solana_keygen.exp
+expect recover_solana_keygen.exp "$phrase" "prompt://?full-path=m/44'/501'/0'/0'"
+rm -rf recover_solana_keygen.exp
 
 # 钱包地址
 echo "钱包地址: $(solana address)"
