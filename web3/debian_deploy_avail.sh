@@ -88,7 +88,7 @@ done
 phrase=$(cat identity.toml | grep 'avail_secret_seed_phrase' | sed -n 's/.*avail_secret_seed_phrase = '\''\(.*[^\\]\)'\''.*/\1/p')
 
 # journalctl -u availd | grep address
-echo ====================================== 助记词文件：${identity_file} =========================================
+echo ====================================== 节点信息写入：${INSTALL_DIR}/file.csv =========================================
 echo "${phrase},${last_ss58_address},${public_key}" > ${INSTALL_DIR}/file.csv
 cat ${INSTALL_DIR}/file.csv
 # 完成安装提示
