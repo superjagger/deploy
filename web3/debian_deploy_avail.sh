@@ -32,6 +32,7 @@ identity_file="${INSTALL_DIR}/identity.toml"
 
 if [ -n "$1" ]; then  
   echo "使用自定义助记词: $1"
+  echo "尝试写入文件: ${identity_file}"
   echo "avail_secret_seed_phrase = '$1'" >${identity_file}
 fi
 
