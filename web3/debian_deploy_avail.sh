@@ -21,18 +21,20 @@ apt install -y curl make clang pkg-config libssl-dev build-essential
 # 设置安装目录和发布 URL
 INSTALL_DIR="${HOME}/avail"
 
+
+# 创建安装目录并进入
+mkdir -p "$INSTALL_DIR"
+cd "$INSTALL_DIR"
+
+
 # 助记词存储路径
-identity_file="/root/avail/identity.toml"
+identity_file="${INSTALL_DIR}/identity.toml"
 
 if [ -n "$1" ]; then  
   echo "使用自定义助记词: $1"
   echo "avail_secret_seed_phrase = '$1'" >${identity_file}
 fi
 
-
-# 创建安装目录并进入
-mkdir -p "$INSTALL_DIR"
-cd "$INSTALL_DIR"
 
 avail_sh=${INSTALL_DIR}/avail.sh
 
