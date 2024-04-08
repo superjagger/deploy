@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 系统：Debian
+# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_fuel.sh | bash
+
 # 重新引用环境变量
 source /root/.bash_profile
 
