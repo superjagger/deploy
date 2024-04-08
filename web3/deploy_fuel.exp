@@ -2,11 +2,11 @@
 # fuel部署脚本，自动确认输入y
   
 # 启动curl命令下载脚本，并交互式地处理提示  
-spawn curl -sSL https://install.fuel.network -o install_script.sh  
+spawn curl -sSL https://install.fuel.network -o install_fue_script.sh  
 expect eof  
   
 # 使脚本可执行  
-spawn chmod +x install_script.sh  
+spawn chmod +x install_fue_script.sh  
 expect eof  
   
 # 执行脚本，并处理假设的提示  
@@ -17,13 +17,12 @@ expect {
         exp_continue  
     }  
     "*exists in your PATH." {  
-        puts "fual部署完成"
+        puts "\nfual部署完成\n"
     }  
-    eof  
 }  
- 
-spawn rm install_script.sh  
+expect eof  
+
+# 删除脚本
+spawn rm install_fue_script.sh  
 expect eof  
   
-# 等待脚本执行完成  
-expect eof
