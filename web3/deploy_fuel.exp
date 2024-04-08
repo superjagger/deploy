@@ -17,10 +17,13 @@ expect {
         exp_continue  
     }  
     "*exists in your PATH." {  
-        send "rm install_script.sh\r"  
+        puts "fual部署完成"
     }  
     eof  
 }  
+ 
+spawn rm install_script.sh  
+expect eof  
   
 # 等待脚本执行完成  
 expect eof
