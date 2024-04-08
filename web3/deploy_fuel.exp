@@ -1,0 +1,8 @@
+#!/usr/bin/expect
+# fuel部署脚本，自动确认输入y
+
+spawn curl https://install.fuel.network | sh
+expect {
+	"*your PATH variable for you? (N/y)" { send "y\r"; exp_continue }
+}
+
