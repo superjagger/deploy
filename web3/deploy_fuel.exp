@@ -1,8 +1,25 @@
 #!/usr/bin/expect
 # fuel部署脚本，自动确认输入y
 
-spawn curl https://install.fuel.network | sh
-expect {
-	"*your PATH variable for you? (N/y)" { send "y\r"; exp_continue }
-}
-
+#!/usr/bin/expect -f  
+  
+# 启动curl命令下载脚本，并交互式地处理提示  
+spawn curl -sSL https://install.fuel.network -o install_script.sh  
+expect eof  
+  
+# 使脚本可执行  
+spawn chmod +x install_script.sh  
+expect eof  
+  
+# 执行脚本，并处理假设的提示  
+spawn ./install_script.sh  
+expect {  
+    "*your PATH variable for you? (N/y)" {  
+        send "y\r"  
+        exp_continue  
+    }  
+    eof  
+}  
+  
+# 等待脚本执行完成  
+expect eof
