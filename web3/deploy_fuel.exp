@@ -1,7 +1,5 @@
-#!/usr/bin/expect
-# fuel部署脚本，自动确认输入y
-
 #!/usr/bin/expect -f  
+# fuel部署脚本，自动确认输入y
   
 # 启动curl命令下载脚本，并交互式地处理提示  
 spawn curl -sSL https://install.fuel.network -o install_script.sh  
