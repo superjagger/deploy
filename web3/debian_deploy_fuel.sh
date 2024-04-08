@@ -25,6 +25,7 @@ if ! command -v fuel-core &>/dev/null; then
   
   # 重新引用环境变量
   source /root/.bash_profile
+  rm -rf deploy_fuel.exp
 else
   echo "fuel-core: 已安装"
 fi
