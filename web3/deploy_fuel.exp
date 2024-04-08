@@ -18,6 +18,9 @@ expect {
         send "y\r"  
         exp_continue  
     }  
+    "*#" {  
+        send "rm install_script.sh\r"  
+    }  
     eof  
 }  
   
