@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 系统：Debian
-# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_fuel.sh | bash
+# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_fuel.sh | bash -s -- "节点名称" "私钥" "Ethereum Sepolia RPC连接"
 
 # 节点名称
 NODE_NAME=$1
