@@ -1,6 +1,10 @@
 #!/usr/bin/expect -f  
 # fuel部署脚本，自动确认输入y
-  
+
+
+# 设置超时时间
+set timeout 30
+
 # 启动curl命令下载脚本，并交互式地处理提示  
 spawn curl -sSL https://install.fuel.network -o install_fue_script.sh  
 expect eof  
