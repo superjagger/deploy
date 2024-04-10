@@ -20,6 +20,13 @@ sudo systemctl stop fuel
 sudo systemctl disable fuel
 rm /etc/systemd/system/fuel.service
 
+# fuel执行文件存储位置
+fuel_folder=$HMOE/fuel_folder
+
+mkdir -p ${fuel_folder}
+
+cd $fuel_folder
+
 # 重新引用环境变量
 source /root/.bash_profile
 
@@ -47,12 +54,6 @@ else
     echo "fuel-core: 已安装"
 fi
 
-# fuel执行文件存储位置
-fuel_folder=$HMOE/fuel_folder
-
-mkdir -p ${fuel_folder}
-
-cd $fuel_folder
 
 # 要持久运行本地节点，您必须配置一个chainConfig.json文件。这里直接下载官方配置版本: beta-5
 curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/FuelLabs/fuel-core/v0.22.0/deployment/scripts/chainspec/beta_chainspec.json -sSf >${fuel_folder}/chainConfig.json
