@@ -65,6 +65,9 @@ rm -rf ${fuel_run_sh}
 
 # 添加运行脚本
 cat >${fuel_run_sh} <<EOF
+
+source /root/.bash_profile
+
 fuel-core run \
     --service-name ${NODE_NAME} \
     --keypair ${P2P_SECRET} \
