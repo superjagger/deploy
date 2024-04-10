@@ -23,6 +23,9 @@ expect {
     "*exists in your PATH." {  
         puts "\nfual部署完成\n"
     }  
+    "*new terminal session to use fuelup." {  
+        puts "\nfual部署完成\n"
+    }  
 }  
 expect eof  
 
