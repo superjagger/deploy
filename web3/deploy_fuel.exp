@@ -21,10 +21,10 @@ expect {
         exp_continue  
     }  
     "*exists in your PATH." {  
-        puts "\nfual部署完成\n"
+        send_user "\nfual部署完成\n"
     }  
     "*new terminal session to use fuelup." {  
-        puts "\nfual部署完成\n"
+        send_user "\nfual部署完成\n"
     }  
 }  
 expect eof  
