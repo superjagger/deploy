@@ -21,7 +21,7 @@ sudo systemctl disable fuel
 rm /etc/systemd/system/fuel.service
 
 # fuel执行文件存储位置
-fuel_folder=$HMOE/fuel_folder
+fuel_folder=$HOME/fuel_folder
 
 mkdir -p ${fuel_folder}
 
