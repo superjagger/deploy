@@ -10,7 +10,7 @@ spawn chmod +x install_fue_script.sh
 expect eof  
   
 # 执行脚本，并处理假设的提示  
-spawn ./install_script.sh  
+spawn ./install_fue_script.sh
 expect {  
     "*your PATH variable for you? (N/y)" {  
         send "y\r"  
