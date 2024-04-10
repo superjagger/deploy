@@ -45,7 +45,7 @@ if ! command -v fuel-core &>/dev/null; then
     # 使用exp安装fuel
     expect deploy_fuel.exp
 
-    echo "export PATH="$HOME/.fuelup/bin:$PATH"" >>/root/.bash_profile
+    echo "export PATH=\"$HOME/.fuelup/bin:\$PATH\"" >>/root/.bash_profile
 
     # 重新引用环境变量
     source /root/.bash_profile
