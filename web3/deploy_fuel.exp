@@ -20,6 +20,9 @@ expect {
         send "y\r"  
         exp_continue  
     }  
+    "*build download configs from channel" {
+        send_user "\nfual部署失败，无法下载脚本\n"
+    }
     "*exists in your PATH." {  
         send_user "\nfual部署完成\n"
     }  
