@@ -36,9 +36,9 @@ if [ -n "$1" ]; then
   echo "avail_secret_seed_phrase = '$1'" >${identity_file}
 fi
 
-
+avail_sh=${INSTALL_DIR}/avail.sh
 curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/availproject/availup/main/availup.sh -sSf > ${avail_sh}
-run_avail_node="bash ${INSTALL_DIR}/avail.sh --identity ${identity_file} --upgrade y"
+run_avail_node="bash ${avail_sh} --identity ${identity_file} --upgrade y"
 
 
 # 配置 systemd 服务文件
