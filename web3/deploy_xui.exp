@@ -1,25 +1,23 @@
 #!/usr/bin/expect
 
 # 部署xui
-# 调用方式  curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_xui.sh | bash -s -- "用户名" "密码" "端口"
+# 调用方式  curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_xui.exp | expect -s -- "用户名" "密码" "端口"
 
 
 # 设置超时时间
 set timeout -1
 
 
-# 用户名密码
-set username [lindex $argv 0]
-set password [lindex $argv 0]
-
-# 端口
-set port [lindex $argv 0]
+# xui 用户名密码端口
+set xui_username [lindex $argv 0]
+set xui_password [lindex $argv 1]
+set xui_port [lindex $argv 2]
 
 spawn bash <(curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/master/install.sh)
 expect {
 	"*次端口与账户密码设定[y/n]:" { send "y\r"; exp_continue }
-	"*设置您的账户名:" { send "${username}\r"; exp_continue }
-	"*您的账户密码:" { send "${password}\r"; exp_continue }
-	"*板访问端口:" { send "${password}\r"; exp_continue }
+	"*设置您的账户名:" { send "${xui_username}\r"; exp_continue }
+	"*您的账户密码:" { send "${xui_password}\r"; exp_continue }
+	"*板访问端口:" { send "${xui_port}\r"; exp_continue }
 	"*安装完成，面板已启动，" { send_user "\n安装完成\n" }
 }
