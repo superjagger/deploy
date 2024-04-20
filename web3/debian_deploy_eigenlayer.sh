@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 系统：Debian
-# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_eigenlayer.sh | bash
+# eigenlayer 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_eigenlayer.sh | bash
 source $HOME/.bash_profile
 
 echo "安装基础包"
