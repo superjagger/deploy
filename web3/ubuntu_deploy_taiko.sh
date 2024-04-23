@@ -7,6 +7,10 @@ private_key=$1
 http_rpc=$2
 ws_rpc=$3
 
+echo "private_key=${private_key}"
+echo "http_rpc=${http_rpc}"
+echo "ws_rpc=${ws_rpc}"
+
 if [ -z "$private_key" ] || [ -z "$http_rpc" ] || [ -z "$ws_rpc" ]; then
     echo "缺少参数"
     exit 1
