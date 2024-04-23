@@ -28,6 +28,7 @@ git clone https://github.com/taikoxyz/simple-taiko-node.git
 cd simple-taiko-node
 cp .env.sample .env
 
-sed -i -e "s/^L1_ENDPOINT_HTTP=.*/L1_ENDPOINT_HTTP=$http_rpc/; s/^L1_ENDPOINT_WS=.*/L1_ENDPOINT_WS=$ws_rpc/; s/^ENABLE_PROVER=false.*/ENABLE_PROVER=true/; s/^L1_PROVER_PRIVATE_KEY=.*/L1_PROVER_PRIVATE_KEY=$private_key/" .env
+
+sed -i -e "s#^L1_ENDPOINT_HTTP=.*#L1_ENDPOINT_HTTP=$http_rpc#; s#^L1_ENDPOINT_WS=.*#L1_ENDPOINT_WS=$ws_rpc#; s#^ENABLE_PROVER=false.*#ENABLE_PROVER=true#; s#^L1_PROVER_PRIVATE_KEY=.*#L1_PROVER_PRIVATE_KEY=$private_key#" .env
 
 docker compose up -d
