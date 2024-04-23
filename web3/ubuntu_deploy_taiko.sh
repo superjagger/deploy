@@ -30,13 +30,14 @@ done
 taiko_dir=$HOME/taiko_dir
 mkdir -p $taiko_dir
 cd $taiko_dir
+rm -rf simple-taiko-node
 git clone https://github.com/taikoxyz/simple-taiko-node.git
 cd simple-taiko-node
 cp .env.sample .env
 
 
 sed -i -e "s#^L1_ENDPOINT_HTTP=.*#L1_ENDPOINT_HTTP=$http_rpc#; s#^L1_ENDPOINT_WS=.*#L1_ENDPOINT_WS=$ws_rpc#; s#^ENABLE_PROVER=false.*#ENABLE_PROVER=true#; s#^L1_PROVER_PRIVATE_KEY=.*#L1_PROVER_PRIVATE_KEY=$private_key#" .env
-
+docker compose down
 docker compose up -d
 
 echo "结束部署taiko验证者节点"
