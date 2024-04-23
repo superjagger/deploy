@@ -4,7 +4,9 @@ source $HOME/.bash_profile
 
 # node 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_node.sh | bash
 
-if ! command -v node &>/dev/null; then
+if which node > /dev/null 2>&1; then
+    echo "node 已经安装"
+else
     echo "node 未安装"
 
     # 安装 Node.js，先安装 NVM
@@ -19,7 +21,4 @@ if ! command -v node &>/dev/null; then
     # 查看版本
     node -v
     npm -v
-    
-else
-    echo "node 已经安装"
 fi
