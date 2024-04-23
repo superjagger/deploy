@@ -4,7 +4,9 @@ source $HOME/.bash_profile
 
 # solana cli 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_solana_cli.sh | bash
 
-if ! command -v solana &>/dev/null; then
+if which solana > /dev/null 2>&1; then
+    echo "solana cli 已经安装"
+else
     echo "solana cli 未安装"
     
     # 安装 rust
@@ -20,7 +22,4 @@ if ! command -v solana &>/dev/null; then
     echo 'export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"' >>$HOME/.profile
     echo 'export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"' >>$HOME/.bash_profile
     source $HOME/.bash_profile
-
-else
-    echo "solana cli 已经安装"
 fi
