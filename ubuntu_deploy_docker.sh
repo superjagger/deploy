@@ -3,7 +3,7 @@
 source $HOME/.bash_profile
 
 # 系统：Debian
-# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
+# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/ubuntu_deploy_docker.sh | bash
 
 if which docker > /dev/null 2>&1; then
     echo "Docker 已经安装"
