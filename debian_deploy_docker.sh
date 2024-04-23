@@ -5,7 +5,9 @@ source $HOME/.bash_profile
 # 系统：Debian
 # docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
 
-if ! command -v docker &>/dev/null; then
+if which docker > /dev/null 2>&1; then
+    echo "Docker 已经安装"
+else
     echo "Docker 未安装"
     # Add Docker's official GPG key:
     sudo apt-get update
@@ -25,6 +27,4 @@ if ! command -v docker &>/dev/null; then
     sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     echo "Docker 成功安装"
-else
-    echo "Docker 已经安装"
 fi
