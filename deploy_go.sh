@@ -4,7 +4,7 @@ source $HOME/.bash_profile
 # 系统：Debian
 # go 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go.sh | bash
 
-if dpkg -s go &> /dev/null; then
+if dpkg -s go &> /dev/null; then  
     echo "Go 未安装"
     wget https://golang.org/dl/go1.21.4.linux-amd64.tar.gz
     tar -C /usr/local -xzf go1.21.4.linux-amd64.tar.gz
