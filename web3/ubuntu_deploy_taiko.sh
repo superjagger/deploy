@@ -2,7 +2,7 @@
 
 # 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/ubuntu_deploy_taiko.sh | bash -s -- "私钥" "Ethereum Sepolia HTTP RPC连接" "Ethereum Sepolia WS RPC连接"
 
-
+echo "开始部署taiko验证者节点"
 private_key=$1
 http_rpc=$2
 ws_rpc=$3
@@ -38,3 +38,5 @@ cp .env.sample .env
 sed -i -e "s#^L1_ENDPOINT_HTTP=.*#L1_ENDPOINT_HTTP=$http_rpc#; s#^L1_ENDPOINT_WS=.*#L1_ENDPOINT_WS=$ws_rpc#; s#^ENABLE_PROVER=false.*#ENABLE_PROVER=true#; s#^L1_PROVER_PRIVATE_KEY=.*#L1_PROVER_PRIVATE_KEY=$private_key#" .env
 
 docker compose up -d
+
+echo "结束部署taiko验证者节点"
