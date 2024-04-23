@@ -19,7 +19,13 @@ fi
 apt-get install git
 
 # 安装docker
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/ubuntu_deploy_docker.sh | bash
+while true  
+do  
+    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/ubuntu_deploy_docker.sh | bash
+    if which docker > /dev/null 2>&1; then
+        break
+    fi
+done
 
 taiko_dir=$HOME/taiko_dir
 mkdir -p $taiko_dir
