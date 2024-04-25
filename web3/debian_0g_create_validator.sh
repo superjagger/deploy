@@ -21,3 +21,5 @@ curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_0g
 
 # 使用导入助记词
 expect debian_0g_recover_mnemonic.exp "${address}" "${private_key}" "${mnemonic}"
+
+rm debian_0g_recover_mnemonic.exp
