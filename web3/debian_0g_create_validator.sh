@@ -3,7 +3,7 @@
 # 系统: Debian
 # 项目: 0g
 # 备注: 创建验证者
-# 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_0g.sh | bash -s -- \"节点与钱包名称\"
+# 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_0g_create_validator.sh | bash -s -- \"服务器ip\" \"服务器密码\" \"钱包地址\" \"钱包秘钥\" \"助记词\"
 
 hostname=$1
 password=$2
