@@ -19,7 +19,7 @@ fi
 
 
 # 下载 exp 安装 导入助记词脚本
-curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_fuel.exp
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_0g_recover_mnemonic.exp
 
 # 使用导入助记词
 expect debian_0g_recover_mnemonic.exp "${hostname}" "${password}" "${address}" "${private_key}" "${mnemonic}"
