@@ -39,11 +39,12 @@ fi
 
 # 下载源码进行部署，这里使用我的备份包，原来0g官方github已经被封了。
 echo "下载0g源码"
-sshpass -p "BwZpAouIfwNWkzw" ssh -n -o StrictHostKeyChecking=no  root@109.199.124.193 pwd >downloads.log 2>&1
-sshpass -p "${gz_server_password}" scp -r root@109.199.124.193:/root/0g_dir/test.tar.gz $_0g_dir/0g.tar.gz  >>downloads.log 2>&1
+sshpass -p "BwZpAouIfwNWkzw" ssh -n -o StrictHostKeyChecking=no  root@109.199.124.193 pwd >run.log 2>&1
+sshpass -p "${gz_server_password}" scp -r root@109.199.124.193:/root/0g_dir/test.tar.gz $_0g_dir/0g.tar.gz  >>run.log 2>&1
 tar -zxvf 0g.tar.gz
 rm 0g.tar.gz
-bash ./0g-evmos/networks/testnet/install.sh
+echo "编译0g代码"
+bash ./0g-evmos/networks/testnet/install.sh >>run.log 2>&1
 
 ### 初始化节点
 # 设置链ID
@@ -69,7 +70,7 @@ sed -i "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.00252aevmos\"/" $HOM
 
 # 下载最新快照
 echo "下载0g快照"
-wget -O latest_snapshot.tar.lz4 https://snapshots-testnet.nodejumper.io/0g-testnet/0g-testnet_latest.tar.lz4  >>downloads.log 2>&1
+wget -O latest_snapshot.tar.lz4 https://snapshots-testnet.nodejumper.io/0g-testnet/0g-testnet_latest.tar.lz4 >>run.log 2>&1
 
 # 备份当前的验证者状态文件
 cp $HOME/.evmosd/data/priv_validator_state.json $HOME/.evmosd/priv_validator_state.json.backup
@@ -106,4 +107,6 @@ EOF
 sudo systemctl enable ogd.service
 sudo systemctl restart ogd.service
 
+
+echo "部署0g节点完成"
 echo "部署0g节点结束"
