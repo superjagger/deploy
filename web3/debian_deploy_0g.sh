@@ -17,7 +17,7 @@ sudo rm $(which ogd)
 sudo rm -rf $HOME/.evmosd
 
 # 基本包安装
-sudo apt-get install -y unzip wget lz4 git sshpass
+sudo apt-get install -y unzip wget lz4 git sshpass expect
 
 # 安装go
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go.sh | bash
