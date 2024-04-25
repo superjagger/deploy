@@ -32,7 +32,8 @@ expect {
     "*passphrase (attempt 1/3):" { send  "${WELLET_PASSWORD}\r" }
 }
 
-# 获取0g钱包地址
+# 获取命令输出并存储到变量中  
+expect -re {(.*)$ }  
 set EVMOSD_ADDRESS $expect_out(1,string)
 
 # 查询钱包余额
