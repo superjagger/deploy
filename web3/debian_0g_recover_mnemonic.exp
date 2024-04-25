@@ -22,10 +22,10 @@ expect {
     "*passphrase (attempt 1/3):" { send "${WELLET_PASSWORD}\r"; exp_continue }
     "*verride the existing name" { send "y\r"; exp_continue }
     "*enter keyring passphrase:" { send "${WELLET_PASSWORD}\r"; exp_continue }
-    "*type: local" { send "\n导入钱包成功: ${WELLET_NAME}\n"}
+    "*type: local" { send "\n导入钱包结束\n"}
 }
 
 expect {
-    "*#" { send "\n导入钱包成功: ${WELLET_NAME}\n" }
+    "*#" { send "\n导入钱包: ${WELLET_NAME}\n" }
 }
 
