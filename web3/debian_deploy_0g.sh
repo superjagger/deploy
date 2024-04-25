@@ -5,6 +5,7 @@
 # 备注: 只是部署没有成为验证者
 # 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_0g.sh | bash -s -- \"节点名称\" "109.199.124.193服务器密码"
 
+echo "部署0g节点开始"
 # 删除原有节点
 sudo systemctl stop ogd.service
 sudo systemctl disable ogd.service
@@ -102,3 +103,4 @@ EOF
 sudo systemctl enable ogd.service
 sudo systemctl restart ogd.service
 
+echo "部署0g节点结束"
