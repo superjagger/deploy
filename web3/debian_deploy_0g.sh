@@ -111,4 +111,3 @@ sudo systemctl restart ogd.service
 
 
 echo "部署0g节点完成"
-echo "部署0g节点结束"
