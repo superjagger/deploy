@@ -35,9 +35,9 @@ git clone https://github.com/taikoxyz/simple-taiko-node.git
 cd simple-taiko-node
 cp .env.sample .env
 
-
 sed -i -e "s#^L1_ENDPOINT_HTTP=.*#L1_ENDPOINT_HTTP=$http_rpc#; s#^L1_ENDPOINT_WS=.*#L1_ENDPOINT_WS=$ws_rpc#; s#^ENABLE_PROVER=false.*#ENABLE_PROVER=true#; s#^L1_PROVER_PRIVATE_KEY=.*#L1_PROVER_PRIVATE_KEY=$private_key#" .env
+echo "停止容器"
 docker compose down
+echo "启动容器"
 docker compose up -d
-
 echo "结束部署taiko验证者节点"
