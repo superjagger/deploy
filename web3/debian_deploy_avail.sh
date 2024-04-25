@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # 系统：Debian
-# docker 安装脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_avail.sh | bash
+# 项目: avail
+# 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_avail.sh | bash
 
 echo "----------------------------- 安装开始 -----------------------------"
 
