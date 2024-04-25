@@ -25,4 +25,7 @@ expect {
     "*type: local" { send "\n导入钱包成功: ${WELLET_NAME}\n"}
 }
 
+expect {
+    "*#" { send "\n导入钱包成功: ${WELLET_NAME}\n" }
+}
 
