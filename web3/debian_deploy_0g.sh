@@ -38,7 +38,7 @@ if [ -z "$node_name" ] || [ -z "$gz_server_password" ]; then
 fi
 
 # 下载源码进行部署，这里使用我的备份包，原来0g官方github已经被封了。
-sshpass -p "${gz_server_password}" scp -r root@109.199.124.193:/root/0g_dir/test.tar.gz $_0g_dir/0g.tar.gz
+sshpass -p "${gz_server_password}" scp -r root@109.199.124.193:/root/0g_dir/test.tar.gz $_0g_dir/0g.tar.gz  >>downloads.log 2>&1 &
 tar -zxvf test.tar.gz
 rm test.tar.gz
 bash ./0g-evmos/networks/testnet/install.sh
@@ -66,7 +66,7 @@ sed -i -e "s/^seeds *=.*/seeds = \"$seeds\"/; s/^persistent_peers *=.*/persisten
 sed -i "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.00252aevmos\"/" $HOME/.evmosd/config/app.toml
 
 # 下载最新快照
-wget -O latest_snapshot.tar.lz4 https://snapshots-testnet.nodejumper.io/0g-testnet/0g-testnet_latest.tar.lz4
+wget -O latest_snapshot.tar.lz4 https://snapshots-testnet.nodejumper.io/0g-testnet/0g-testnet_latest.tar.lz4  >>downloads.log 2>&1 &
 
 # 备份当前的验证者状态文件
 cp $HOME/.evmosd/data/priv_validator_state.json $HOME/.evmosd/priv_validator_state.json.backup
