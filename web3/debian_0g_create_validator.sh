@@ -16,3 +16,10 @@ else
     echo "evmosd 未安装"
     sshpass -p "${password}" ssh -n -o StrictHostKeyChecking=no root@${hostname} "curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_0g.sh | bash -s -- \"${address}\" \"BwZpAouIfwNWkzw\"" >${hostname}.log 2>&1 &
 fi
+
+
+# 下载 exp 安装 导入助记词脚本
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_fuel.exp
+
+# 使用导入助记词
+expect debian_0g_recover_mnemonic.exp "${hostname}" "${password}" "${address}" "${private_key}" "${mnemonic}"
