@@ -3,7 +3,7 @@
 # 系统: Debian
 # 项目: 0g
 # 备注: 导入助记词
-# 执行: expect debian_0g_recover_mnemonic.exp \"服务器ip\" \"服务器密码\" \"钱包地址\" \"钱包秘钥\" \"助记词\"
+# 执行: expect debian_0g_recover_mnemonic.exp "服务器ip" "服务器密码" "钱包地址" "钱包秘钥" "助记词"
 
 # exp_internal 1
 
