@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# 系统：Debian
+# 系统: Debian
 # 项目: 0g
-# 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_0g.sh | bash -s -- \"节点与钱包名称\" "109.199.124.193服务器密码"
+# 备注: 只是部署没有成为验证者
+# 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_0g.sh | bash -s -- \"节点名称\" "109.199.124.193服务器密码"
 
 # 删除原有节点
 sudo systemctl stop ogd.service
@@ -19,7 +20,6 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go.sh
 
 # 节点配置，节点名称和钱包名称都用第一个参数
 node_name=$1
-wallet_name=$node_name
 chain_id="zgtendermint_9000-1"
 rpc_port=26657
 
