@@ -41,8 +41,8 @@ fi
 echo "下载0g源码"
 sshpass -p "BwZpAouIfwNWkzw" ssh -n -o StrictHostKeyChecking=no  root@109.199.124.193 pwd >downloads.log 2>&1
 sshpass -p "${gz_server_password}" scp -r root@109.199.124.193:/root/0g_dir/test.tar.gz $_0g_dir/0g.tar.gz  >>downloads.log 2>&1
-tar -zxvf test.tar.gz
-rm test.tar.gz
+tar -zxvf 0g.tar.gz
+rm 0g.tar.gz
 bash ./0g-evmos/networks/testnet/install.sh
 
 ### 初始化节点
