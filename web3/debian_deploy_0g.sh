@@ -9,6 +9,7 @@ source $HOME/.bash_profile
 
 echo "部署0g节点开始"
 # 删除原有节点
+echo "清理0g原有安装数据"
 sudo systemctl stop ogd.service
 sudo systemctl disable ogd.service
 sudo rm -rf /etc/systemd/system/ogd.service
