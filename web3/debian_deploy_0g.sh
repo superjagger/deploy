@@ -21,6 +21,8 @@ sudo apt-get install -y unzip wget lz4 git sshpass
 # 安装go
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go.sh | bash
 
+source $HOME/.bash_profile
+
 # 节点配置，节点名称和钱包名称都用第一个参数
 node_name=$1
 chain_id="zgtendermint_9000-1"
