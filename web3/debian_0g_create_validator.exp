@@ -1,0 +1,74 @@
+#!/usr/bin/expect
+
+# 系统: Debian
+# 项目: 0g
+# 备注: 导入助记词
+# 执行: expect debian_0g_create_validator.exp "钱包地址" "钱包秘钥" "助记词"
+
+#exp_internal 1
+
+# 设置超时时间
+set timeout 10
+
+set IP [lindex $argv 0]
+set PASSWORD [lindex $argv 1]
+# 钱包名称，钱包名称建议直接用公钥方便查询，密码直接私钥
+set WELLET_NAME [lindex $argv 2]
+set WELLET_PASSWORD  [lindex $argv 3]
+# 助记词
+set WELLET_MNEMONIC [lindex $argv 4]
+
+
+# 命令行输入窗口（默认是服务器名称）
+set HOSTS_NAME ~#
+
+spawn ssh root@${IP}
+expect {
+        "*yes/no" { send "yes\r"; exp_continue }
+        "*password:" { send "${PASSWORD}\r"}
+}
+
+expect "*${HOSTS_NAME}"
+send "evmosd keys add ${WELLET_NAME} --recover\r"
+
+expect {
+    "*Enter your bip39 mnemonic" { send "${WELLET_MNEMONIC}\r"; exp_continue }
+    "*passphrase (attempt 1/3):" { send "${WELLET_PASSWORD}\r"; exp_continue }
+    "*verride the existing name" { send "y\r"; exp_continue }
+    "*enter keyring passphrase:" { send "${WELLET_PASSWORD}\r"; exp_continue }
+    "*type: local" { puts "钱包导入完成"}
+}
+
+expect "*${HOSTS_NAME}"
+send "evmosd keys show ${WELLET_NAME} -a\r"
+
+expect "*passphrase (attempt 1/3):"
+send  "${WELLET_PASSWORD}\r"
+
+expect -re "evmos.*"  
+set EVMOSD_ADDRESS $expect_out(0,string)
+
+puts ${EVMOSD_ADDRESS}
+
+expect "*${HOSTS_NAME}" 
+send "evmosd query bank balances ${EVMOSD_ADDRESS}\r"
+
+expect -re "amount: \"(.*?)\""  
+set BALANCES $expect_out(1,string)
+
+# 检查比较结果  
+if { ${BALANCES} > 10000000000000000 } {  
+    puts "余额：${BALANCES}，可以转验证者"
+    # 创建验证者
+    expect "*${HOSTS_NAME}" 
+    send "evmosd tx staking create-validator --amount=10000000000000000aevmos --pubkey=\$(evmosd tendermint show-validator) --moniker=${WELLET_NAME} --chain-id=zgtendermint_9000-1  --commission-rate=0.05 --commission-max-rate=0.10 --commission-max-change-rate=0.01 --min-self-delegation=1 --from=${WELLET_NAME} --identity=\"\" --website=\"\" --details=\"${WELLET_NAME}\" --gas=500000 --gas-prices=99999aevmos -y\r"
+
+    expect {
+        "*passphrase (attempt 1/3):" { send "${WELLET_PASSWORD}\r" }
+    }
+    expect -re "txhash:.*"  
+    set TXHASH $expect_out(0,string)
+    puts "转换验证者成功，交易地址 ${TXHASH}"
+} else {
+    puts "余额：${BALANCES}，不能转验证者"
+}
