@@ -20,9 +20,9 @@ fi
 sudo apt-get install -y expect
 
 # 下载 exp 安装 导入助记词脚本
-curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_0g_recover_mnemonic.exp
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_0g_create_validator.exp
 
 # 使用导入助记词
-expect debian_0g_recover_mnemonic.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
+expect debian_0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
 
-rm debian_0g_recover_mnemonic.exp
+rm debian_0g_create_validator.exp
