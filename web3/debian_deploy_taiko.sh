@@ -14,12 +14,12 @@ private_key=$2
 http_rpc=$3
 ws_rpc=$4
 beacon_rpc=$5
-prover_endpoints=$5
+prover_endpoints=$6
 
-if [ -z "$6" ]; then
+if [ -z "$7" ]; then
     clear=0
 else
-    clear=$6
+    clear=$7
 fi
 
 if [ "$clear" -ne 0 ]; then
