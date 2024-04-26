@@ -18,10 +18,10 @@ prover_endpoints=$5
 clear=$6
 
 if [ -z "$clear" ]; then
-    echo "保留历史数据: ${address}"
+    echo "clear变量: ${clear}，保留历史数据: ${address}"
     clear=0
 else
-    echo "删除历史数据: ${address}"
+    echo "clear变量: ${clear}，删除历史数据: ${address}"
 fi
 
 echo "private_key=${private_key}"
