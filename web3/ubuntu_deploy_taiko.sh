@@ -46,8 +46,14 @@ sed -i "s|L2_SUGGESTED_FEE_RECIPIENT=.*|L2_SUGGESTED_FEE_RECIPIENT=${address}|" 
 sed -i "s|ENABLE_PROPOSER=.*|ENABLE_PROPOSER=true|" .env
 sed -i "s|DISABLE_P2P_SYNC=.*|DISABLE_P2P_SYNC=false|" .env
 
-echo "停止容器"
-docker compose down
-echo "启动容器"
-docker compose up -d
+echo "停止 Taiko 容器"
+docker compose --profile l2_execution_engine down
+docker stop simple-taiko-node-taiko_client_proposer-1 && docker rm simple-taiko-node-taiko_client_proposer-1
+
+echo "运行 Taiko 节点容器"
+docker compose --profile l2_execution_engine up -d
+
+echo "运行 Taiko proposer 节点"
+docker compose up taiko_client_proposer -d
+
 echo "结束部署taiko验证者节点"
