@@ -15,14 +15,19 @@ http_rpc=$3
 ws_rpc=$4
 beacon_rpc=$5
 prover_endpoints=$5
-clear=$6
 
-if [ -z "$clear" ]; then
-    echo "clear变量: ${clear}，保留历史数据: ${address}"
+if [ -z "$6" ]; then
     clear=0
 else
-    echo "clear变量: ${clear}，删除历史数据: ${address}"
+    clear=$6
 fi
+
+if [ "$clear" -ne 0 ]; then
+    echo "本次脚本会删除原有数据"
+    sleep 2
+fi
+
+echo "clear变量: ${clear}，保留历史数据: ${address}"
 
 echo "private_key=${private_key}"
 echo "http_rpc=${http_rpc}"
@@ -67,7 +72,7 @@ sed -i "s|BLOCK_PROPOSAL_FEE=.*|BLOCK_PROPOSAL_FEE=30|" .env
 echo "停止 Taiko 容器"
 docker compose --profile l2_execution_engine down
 docker stop simple-taiko-node-taiko_client_proposer-1 && docker rm simple-taiko-node-taiko_client_proposer-1
-if [ "$my_var" -ne 0 ]; then
+if [ "$clear" -ne 0 ]; then
     echo "删除原有数据"
     docker volume rm simple-taiko-node_grafana_data simple-taiko-node_l2_execution_engine_data simple-taiko-node_prometheus_data simple-taiko-node_zkevm_chain_prover_rpcd_data
 fi
