@@ -8,6 +8,7 @@ private_key=$2
 http_rpc=$3
 ws_rpc=$4
 beacon_rpc=$5
+prover_endpoints=$5
 
 echo "private_key=${private_key}"
 echo "http_rpc=${http_rpc}"
@@ -45,6 +46,7 @@ sed -i "s|L2_SUGGESTED_FEE_RECIPIENT=.*|L2_SUGGESTED_FEE_RECIPIENT=${address}|" 
 
 sed -i "s|ENABLE_PROPOSER=.*|ENABLE_PROPOSER=true|" .env
 sed -i "s|DISABLE_P2P_SYNC=.*|DISABLE_P2P_SYNC=false|" .env
+sed -i "s|PROVER_ENDPOINTS=.*|PROVER_ENDPOINTS=${prover_endpoints}|" .env
 
 echo "停止 Taiko 容器"
 docker compose --profile l2_execution_engine down
