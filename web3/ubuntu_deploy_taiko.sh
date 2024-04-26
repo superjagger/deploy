@@ -51,6 +51,8 @@ sed -i "s|PROVER_ENDPOINTS=.*|PROVER_ENDPOINTS=${prover_endpoints}|" .env
 echo "停止 Taiko 容器"
 docker compose --profile l2_execution_engine down
 docker stop simple-taiko-node-taiko_client_proposer-1 && docker rm simple-taiko-node-taiko_client_proposer-1
+echo "删除原有数据"
+docker volume rm simple-taiko-node_grafana_data simple-taiko-node_l2_execution_engine_data simple-taiko-node_prometheus_data simple-taiko-node_zkevm_chain_prover_rpcd_data
 
 echo "运行 Taiko 节点容器"
 docker compose --profile l2_execution_engine up -d
