@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # debian 系统
-# 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_taiko.sh | bash -s -- "钱包地址" "私钥" "Ethereum Holskey HTTP RPC连接" "Ethereum Holskey WS RPC连接" "Beacon Holskey RPC连接" "prover_endpoints 地址"
+# 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/debian_deploy_taiko.sh | bash -s -- "钱包地址" "私钥" "Ethereum Holskey HTTP RPC连接" "Ethereum Holskey WS RPC连接" "Beacon Holskey RPC连接" "prover_endpoints 地址" "1表示清空以前的数据,不输入或者0表示保留数据"
 # 可以用下面的公共rpc地址
 # http_rpc=https://ethereum-holesky-rpc.publicnode.com
 # ws_rpc=wss://ethereum-holesky-rpc.publicnode.com
@@ -15,6 +15,14 @@ http_rpc=$3
 ws_rpc=$4
 beacon_rpc=$5
 prover_endpoints=$5
+clear=$6
+
+if [ -z "$clear" ]; then
+    echo "保留历史数据: ${address}"
+    clear=0
+else
+    echo "删除历史数据: ${address}"
+fi
 
 echo "private_key=${private_key}"
 echo "http_rpc=${http_rpc}"
@@ -59,8 +67,10 @@ sed -i "s|BLOCK_PROPOSAL_FEE=.*|BLOCK_PROPOSAL_FEE=30|" .env
 echo "停止 Taiko 容器"
 docker compose --profile l2_execution_engine down
 docker stop simple-taiko-node-taiko_client_proposer-1 && docker rm simple-taiko-node-taiko_client_proposer-1
-echo "删除原有数据"
-docker volume rm simple-taiko-node_grafana_data simple-taiko-node_l2_execution_engine_data simple-taiko-node_prometheus_data simple-taiko-node_zkevm_chain_prover_rpcd_data
+if [ "$my_var" -ne 0 ]; then
+    echo "删除原有数据"
+    docker volume rm simple-taiko-node_grafana_data simple-taiko-node_l2_execution_engine_data simple-taiko-node_prometheus_data simple-taiko-node_zkevm_chain_prover_rpcd_data
+fi
 
 echo "运行 Taiko 节点容器"
 docker compose --profile l2_execution_engine up -d
