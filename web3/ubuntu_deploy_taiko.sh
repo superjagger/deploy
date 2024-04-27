@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# ubuntu 系统
 # 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/ubuntu_deploy_taiko.sh | bash -s -- "钱包地址" "私钥" "Ethereum Holskey HTTP RPC连接" "Ethereum Holskey WS RPC连接" "Beacon Holskey RPC连接" "prover_endpoints 地址" "不输入或者0表示保留数据，否则是清空数据"
 # 可以用下面的公共rpc地址
 # http_rpc=https://ethereum-holesky-rpc.publicnode.com
