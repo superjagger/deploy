@@ -45,7 +45,7 @@ apt-get install git
 # 安装docker
 while true  
 do  
-    https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
+    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
     if which docker > /dev/null 2>&1; then
         break
     fi
