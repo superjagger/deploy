@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 # 部署xui
-# 调用方式  apt-get install expect && curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/FranzKafkaYu/x-ui/master/install.sh -sSf > install_xui.sh && curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_xui.exp -sSf > deploy_xui.exp && expect deploy_xui.exp "a" "a" "20000" && rm install_xui.sh && rm deploy_xui.exp
+# 调用方式  apt-get install -y expect && curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/FranzKafkaYu/x-ui/master/install.sh -sSf > install_xui.sh && curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_xui.exp -sSf > deploy_xui.exp && expect deploy_xui.exp "a" "a" "20000" && rm install_xui.sh && rm deploy_xui.exp
 
 
 
