@@ -16,6 +16,12 @@ ws_rpc=$4
 beacon_rpc=$5
 prover_endpoints=$6
 
+if [ -z "$7" ]; then
+    clear=0
+else
+    clear=$7
+fi
+
 if [ "$clear" -ne 0 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
     sleep 1
