@@ -32,7 +32,6 @@ if [ "$clear" -ne 0 ]; then
     echo "1"
 fi
 
-
 echo "address=${address}"
 echo "private_key=${private_key}"
 echo "http_rpc=${http_rpc}"
@@ -48,10 +47,9 @@ fi
 apt-get install git
 
 # 安装docker
-while true  
-do  
+while true; do
     curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/ubuntu_deploy_docker.sh | bash
-    if which docker > /dev/null 2>&1; then
+    if which docker >/dev/null 2>&1; then
         break
     fi
 done
