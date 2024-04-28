@@ -26,14 +26,12 @@ if [ "$clear" -ne 0 ]; then
     echo "1"
 fi
 
-
 echo "address=${address}"
 echo "private_key=${private_key}"
 echo "http_rpc=${http_rpc}"
 echo "ws_rpc=${ws_rpc}"
 echo "beacon_rpc=${beacon_rpc}"
 echo "prover_endpoints=${prover_endpoints}"
-
 
 if [ -z "$ws_rpc" ]; then
     echo "缺少参数"
@@ -43,10 +41,9 @@ fi
 apt-get install git
 
 # 安装docker
-while true  
-do  
+while true; do
     curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/debian_deploy_docker.sh | bash
-    if which docker > /dev/null 2>&1; then
+    if which docker >/dev/null 2>&1; then
         break
     fi
 done
