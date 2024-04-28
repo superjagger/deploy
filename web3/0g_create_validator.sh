@@ -23,6 +23,6 @@ sudo apt-get install -y expect
 curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create_validator.exp
 
 # 使用导入助记词
-expect debian_0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
+expect 0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
 
 rm debian_0g_create_validator.exp
