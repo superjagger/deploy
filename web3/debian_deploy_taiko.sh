@@ -79,9 +79,9 @@ if [ "$clear" -ne 0 ]; then
 fi
 
 echo "运行 Taiko 节点容器"
-docker compose --profile l2_execution_engine up -d  >run.log 2>&1
+docker compose --profile l2_execution_engine up -d >run.log 2>&1
 
 echo "运行 Taiko proposer 节点"
-docker compose up taiko_client_proposer -d  >>run.log 2>&1
+docker compose up taiko_client_proposer -d >>run.log 2>&1
 
 echo "结束部署taiko验证者节点"
