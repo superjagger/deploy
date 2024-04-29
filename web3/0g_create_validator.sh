@@ -26,4 +26,4 @@ curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create
 # 使用导入助记词
 expect 0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
 
-rm debian_0g_create_validator.exp
+rm 0g_create_validator.exp
