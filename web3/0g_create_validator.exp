@@ -23,8 +23,9 @@ set WELLET_MNEMONIC [lindex $argv 4]
 set HOSTS_NAME ~#
 
 spawn sshpass -p "${PASSWORD}" ssh -n -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@${IP}
-expect "*${HOSTS_NAME}"
-send "evmosd keys add ${WELLET_NAME} --recover\r"
+expect {
+    "*${HOSTS_NAME}" { send "evmosd keys add ${WELLET_NAME} --recover\r" }
+}
 
 expect {
     "*Enter your bip39 mnemonic" { send "${WELLET_MNEMONIC}\r"; exp_continue }
