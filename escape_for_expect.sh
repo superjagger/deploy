@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# 以下代码加入到bash脚本就可以导入函数，然后引用函数
-# wget -O temp_script.sh https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh
-# ./temp_script.sh
-# rm ./temp_script.sh
+# 以下代码加入到bash脚本就可以导入函数，引用函数
+# curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
+
 
 # 转义 expect 中的特殊字符
 function escape_for_expect() {
