@@ -6,8 +6,11 @@
 # 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create_validator.sh | bash -s -- "IP" "服务器密码" "钱包地址" "钱包秘钥" "助记词"
 
 source $HOME/.bash_profile
+
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
+
 ip=$1
-password=$2
+password=$(escape_for_expect $2)
 address=$3
 private_key=$4
 mnemonic=$5
@@ -23,10 +26,8 @@ sudo apt-get install -y expect
 # 下载 exp 安装 导入助记词脚本
 curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create_validator.exp
 
-curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
 # 引用函数: output=$(escape_for_expect $input)
 
-password=$(escape_for_expect $password)
 echo "转以后密码: ${password}"
 # 使用导入助记词
 expect 0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
