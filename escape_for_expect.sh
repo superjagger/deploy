@@ -12,6 +12,7 @@ function escape_for_expect() {
     # 注意：这里只列出了一些常见的特殊字符，你可能需要添加更多
     adapted_password=$(
         echo $input |
+            sed 's,\\,\\\\,g' |
             # sed "s/\,/\\\,/g" |
             # sed "s/{/\\\{/g" |
             # sed "s/*/\\\*/g" |
@@ -40,7 +41,6 @@ function escape_for_expect() {
             sed "s/\[/\\\[/g" |
             sed "s/}/\\\}/g" |
             sed 's,\$,\\\$,g' |
-            sed 's,\\,\\\\,g' |
             sed 's,`,\\\`,g'
     )
     echo "$adapted_password"
