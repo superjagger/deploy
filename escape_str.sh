@@ -19,13 +19,13 @@ function escape_for_expect() {
     echo "$adapted_password"
 }
 
-# 转义 sshpass ssh 命令行的特殊字符
-function escape_for_sshpass() {
+# 转义双引号内字符串
+function escape_for_double_quotes() {
     input="$1"
     adapted_password=$(
         echo $input |
             sed 's,\\,\\\\,g' |
-            sed 's,",\\\",g' |
+            sed 's,`,\\\`,g' |
             sed 's,\$,\\\$,g'
     )
     echo "$adapted_password"
