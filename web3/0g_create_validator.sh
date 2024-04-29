@@ -23,6 +23,10 @@ sudo apt-get install -y expect
 # 下载 exp 安装 导入助记词脚本
 curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create_validator.exp
 
+curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
+# 引用函数: output=$(escape_for_expect $input)
+
+private_key=$(escape_for_expect $private_key)
 # 使用导入助记词
 expect 0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
 
