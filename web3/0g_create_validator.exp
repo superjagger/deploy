@@ -22,7 +22,7 @@ set WELLET_MNEMONIC [lindex $argv 4]
 # 命令行输入窗口（默认是服务器名称）
 set HOSTS_NAME ~#
 
-spawn sshpass -p "${PASSWORD}" ssh -n -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@${IP}
+spawn sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@${IP}
 expect {
     "*${HOSTS_NAME}" { send "evmosd keys add ${WELLET_NAME} --recover\r" }
 }
