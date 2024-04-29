@@ -26,7 +26,7 @@ function escape_for_sshpass() {
         echo $input |
             sed 's,\\,\\\\,g' |
             sed 's,",\\\",g' |
-            sed 's,\$,\\\$,g' |
+            sed 's,\$,\\\$,g'
     )
     echo "$adapted_password"
 }
