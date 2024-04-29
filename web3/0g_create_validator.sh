@@ -8,7 +8,6 @@
 source $HOME/.bash_profile
 
 curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
-echo $2
 ip=$1
 password=$(escape_for_expect $2)
 address=$3
