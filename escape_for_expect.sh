@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 下载本地然后引用函数
+# 以下代码加入到bash脚本就可以导入函数，然后引用函数
 # wget -O temp_script.sh https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh
 # ./temp_script.sh
 # rm ./temp_script.sh
