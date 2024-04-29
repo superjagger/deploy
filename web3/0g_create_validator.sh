@@ -5,6 +5,7 @@
 # 备注: 创建验证者，必须领过水的，同时区块高度能够查到领水钱包，不然无法创建验证者
 # 执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create_validator.sh | bash -s -- "IP" "服务器密码" "钱包地址" "钱包秘钥" "助记词"
 
+source $HOME/.bash_profile
 ip=$1
 password=$2
 address=$3
