@@ -26,8 +26,7 @@ curl -O https://raw.githubusercontent.com/superjagger/deploy/main/web3/0g_create
 curl -O https://raw.githubusercontent.com/superjagger/deploy/main/escape_for_expect.sh && source escape_for_expect.sh && rm ./escape_for_expect.sh
 # 引用函数: output=$(escape_for_expect $input)
 
-private_key=$(escape_for_expect $private_key)
-echo "转义后密码: ${private_key}"
+password=$(escape_for_expect $password)
 # 使用导入助记词
 expect 0g_create_validator.exp "${ip}" "${password}" "${address}" "${private_key}" "${mnemonic}"
 
