@@ -9,6 +9,7 @@ if which forge > /dev/null 2>&1; then
 else
     echo "foundry 未安装"
     curl -L https://foundry.paradigm.xyz | bash
-    source /root/.bashrc
+    echo ' export PATH="$PATH:/root/.foundry/bin"' >>$HOME/.bash_profile
+    source $HOME/.bash_profile
     foundryup
 fi
