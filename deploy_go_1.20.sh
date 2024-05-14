@@ -14,5 +14,5 @@ else
     source $HOME/.bash_profile
     go version
     
-    rm go1.21.4.linux-amd64.tar.gz
+    rm go1.20.14.linux-amd64.tar.gz
 fi
