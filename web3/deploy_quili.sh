@@ -2,6 +2,8 @@
 
 # quili 节点部署脚本
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash
+# 清除原有数据部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s -- 1
+
 
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
