@@ -19,6 +19,12 @@ else
     echo "Go 未安装"
     wget https://golang.org/dl/go${go_version}.linux-amd64.tar.gz >deploy_go.log 2>&1
     mkdir -p ${go_dir}
+    go_tar=go${go_version}.linux-amd64.tar.gz
+    # 检查文件是否存在
+    if [ ! -f "$go_tar" ]; then
+        echo "版本 $go_tar 不存在."
+        exit 1
+    fi
     tar -C ${go_dir} -xzf go${go_version}.linux-amd64.tar.gz
     export PATH=$PATH:${go_dir}/go/bin
     go version
