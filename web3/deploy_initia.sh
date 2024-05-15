@@ -13,12 +13,11 @@ mkdir -p $initia_dir
 run_node_sh=$initia_dir/run_initia_node.sh
 
 if [ -f $run_node_sh ]; then
-    echo "已部署 initiad，只进行服务重启"
+    echo "已部署 initiad ，只进行服务重启"
     sudo systemctl restart initiad
     echo "成功重启"
     exit
 fi
-
 echo "开始部署 initiad"
 
 # 清理环境变量中的go版本
@@ -50,8 +49,15 @@ wget -O $HOME/.initia/config/addrbook.json https://rpc-initia-testnet.trusted-po
 sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.15uinit,0.01uusdc\"|" $HOME/.initia/config/app.toml
 
 # 配置节点
-PEERS="40d3f977d97d3c02bd5835070cc139f289e774da@168.119.10.134:26313,841c6a4b2a3d5d59bb116cc549565c8a16b7fae1@23.88.49.233:26656,e6a35b95ec73e511ef352085cb300e257536e075@37.252.186.213:26656,2a574706e4a1eba0e5e46733c232849778faf93b@84.247.137.184:53456,ff9dbc6bb53227ef94dc75ab1ddcaeb2404e1b0b@178.170.47.171:26656,edcc2c7098c42ee348e50ac2242ff897f51405e9@65.109.34.205:36656,07632ab562028c3394ee8e78823069bfc8de7b4c@37.27.52.25:19656,028999a1696b45863ff84df12ebf2aebc5d40c2d@37.27.48.77:26656,140c332230ac19f118e5882deaf00906a1dba467@185.219.142.119:53456,1f6633bc18eb06b6c0cab97d72c585a6d7a207bc@65.109.59.22:25756,065f64fab28cb0d06a7841887d5b469ec58a0116@84.247.137.200:53456,767fdcfdb0998209834b929c59a2b57d474cc496@207.148.114.112:26656,093e1b89a498b6a8760ad2188fbda30a05e4f300@35.240.207.217:26656,12526b1e95e7ef07a3eb874465662885a586e095@95.216.78.111:26656"
-sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.initia/config/config.toml
+PEERS=$(curl -s --max-time 3 --retry 2 --retry-connrefused "https://rpc-initia-testnet.trusted-point.com/peers.txt")
+if [ -z "$PEERS" ]; then
+    echo "peer 更新失败."
+    exit 1
+else
+    echo -e "\nPEERS: $PEERS"
+    sed -i "s/^persistent_peers =.*/persistent_peers = \"$PEERS\"/" "$HOME/.initia/config/config.toml"
+    echo -e "\nConfiguration file updated successfully.\n"
+fi
 
 # 配置端口
 node_address="tcp://localhost:53457"
@@ -100,7 +106,7 @@ sudo tee /lib/systemd/system/initiad.service >/dev/null <<EOF
 Description=initiad Service
 
 [Service]  
-CPUQuota=40%
+CPUQuota=150%
 User=root
 Type=simple
 WorkingDirectory=${initia_dir}
@@ -122,3 +128,4 @@ sudo systemctl restart initiad
 sudo systemctl status initiad
 # sudo systemctl stop initiad
 # journalctl -u initiad -f -n 10
+
