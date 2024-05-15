@@ -13,11 +13,13 @@ mkdir -p $initia_dir
 run_node_sh=$initia_dir/run_initia_node.sh
 
 if [ -f $run_node_sh ]; then
-    echo "已部署，只进行服务重启"
+    echo "已部署 initiad，只进行服务重启"
     sudo systemctl restart initiad
     echo "成功重启"
     exit
 fi
+
+echo "开始部署 initiad"
 
 # 清理环境变量中的go版本
 go_version=1.22.2 # 设定go版本号
