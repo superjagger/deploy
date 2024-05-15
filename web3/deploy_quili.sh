@@ -52,7 +52,6 @@ ExecStart=/usr/bin/bash run_ceremonyclient_node.sh
 [Install]
 WantedBy=multi-user.target
 EOF
-
     sudo systemctl daemon-reload
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
@@ -61,6 +60,7 @@ export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
+    echo "重启服务"
     sudo systemctl restart ceremonyclient
     exit
 fi
