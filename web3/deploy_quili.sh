@@ -31,6 +31,8 @@ if [ -f $run_node_sh ]; then
     cd $quili_dir
 
     go_dir=/usr/local/go_${go_version}
+    
+    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
 export PATH=$PATH:${go_dir}/go/bin
