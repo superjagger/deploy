@@ -1,6 +1,4 @@
 #!/bin/bash
-source $HOME/.bash_profile
-
 # 系统：Debian
 # go 安装不同版本脚本，执行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- [版本号]
 
