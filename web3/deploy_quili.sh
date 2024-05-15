@@ -64,6 +64,8 @@ cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
     sudo systemctl restart ceremonyclient
+    
+    echo "成功重启"
     exit
 fi
 
