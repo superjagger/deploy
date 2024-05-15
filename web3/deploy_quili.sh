@@ -7,7 +7,6 @@
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 
-sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 go_version=1.20.14
 
 if [ "$1" == "1" ]; then
@@ -28,20 +27,10 @@ fi
 # 安装go
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
 go_dir=/usr/local/go_${go_version}
-export PATH=$PATH:${go_dir}/go/bin
+export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 
 if [ -f $run_node_sh ]; then
     echo "已部署，只进行服务重启"
-    # 进入ceremonyclient/node目录
-    cd $quili_dir
-
-    # 编写节点启动脚本
-    cat >$run_node_sh <<EOF
-go_dir=/usr/local/go_${go_version}
-export PATH=\$PATH:\${go_dir}/go/bin
-cd $quili_dir/ceremonyclient/node
-/usr/bin/bash poor_mans_cd.sh
-EOF
     sudo systemctl restart ceremonyclient
     exit
 fi
@@ -76,7 +65,7 @@ cd $quili_dir
 # 编写节点启动脚本
 cat >$run_node_sh <<EOF
 go_dir=/usr/local/go_${go_version}
-export PATH=\$PATH:\${go_dir}/go/bin
+export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
