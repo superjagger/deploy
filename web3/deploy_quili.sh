@@ -41,7 +41,7 @@ if [ -f $run_node_sh ]; then
 Description=Ceremony Client GO App Service
 
 [Service]  
-CPUQuota=100%
+CPUQuota=200%
 User=root
 Type=simple
 Restart=always
@@ -64,8 +64,6 @@ cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
     sudo systemctl restart ceremonyclient
-    
-    echo "成功重启"
     exit
 fi
 
@@ -110,7 +108,7 @@ sudo tee /lib/systemd/system/ceremonyclient.service >/dev/null <<EOF
 Description=Ceremony Client GO App Service
 
 [Service]  
-CPUQuota=100%
+CPUQuota=200%
 User=root
 Type=simple
 Restart=always
