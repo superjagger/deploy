@@ -7,6 +7,8 @@
 
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
+# 关闭防火墙
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
 
 if [ "$1" == "1" ]; then  
     echo "准备清空原有节点重新部署，如果不想请及时终止脚本"  
