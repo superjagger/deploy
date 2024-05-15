@@ -12,9 +12,9 @@ go_dir=/usr/local/go_${go_version}
 export PATH=$PATH:${go_dir}/go/bin
 
 if which go > /dev/null 2>&1; then
-    echo "Go 已经安装"
+    echo "Go ${go_version}已经安装"
 else
-    echo "Go 未安装"
+    echo "Go ${go_version}未安装"
     wget https://golang.org/dl/go${go_version}.linux-amd64.tar.gz >deploy_go.log 2>&1
     mkdir -p ${go_dir}
     go_tar=go${go_version}.linux-amd64.tar.gz
