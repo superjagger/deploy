@@ -7,7 +7,6 @@
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 
-sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 go_version=1.20.14
 
 if [ "$1" == "1" ]; then
