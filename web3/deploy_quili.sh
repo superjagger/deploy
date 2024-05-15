@@ -4,14 +4,15 @@
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash
 # 清除原有数据部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s -- 1
 
-
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
-# 关闭防火墙
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
 
-if [ "$1" == "1" ]; then  
-    echo "准备清空原有节点重新部署，如果不想请及时终止脚本"  
+# 移除环境变量中的go版本
+sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
+go_version=1.20.14
+
+if [ "$1" == "1" ]; then
+    echo "准备清空原有节点重新部署，如果不想请及时终止脚本"
     sleep 2
     echo "3"
     sleep 2
@@ -27,6 +28,16 @@ fi
 
 if [ -f $run_node_sh ]; then
     echo "已部署，只进行服务重启"
+    # 进入ceremonyclient/node目录
+    cd $quili_dir
+
+    # 编写节点启动脚本
+    cat >$run_node_sh <<EOF
+go_dir=/usr/local/go_${go_version}
+export PATH=$PATH:${go_dir}/go/bin
+cd $quili_dir/ceremonyclient/node
+/usr/bin/bash poor_mans_cd.sh
+EOF
     sudo systemctl restart ceremonyclient
     exit
 fi
@@ -49,9 +60,9 @@ fi
 sudo apt update && sudo apt -y upgrade
 sudo apt install git ufw bison screen binutils gcc make bsdmainutils -y
 # 安装go
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_1.20.sh | bash
-
-source $HOME/.bash_profile
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
+go_dir=/usr/local/go_${go_version}
+export PATH=$PATH:${go_dir}/go/bin
 
 mkdir -p $quili_dir
 cd $quili_dir
@@ -64,7 +75,8 @@ cd $quili_dir
 
 # 编写节点启动脚本
 cat >$run_node_sh <<EOF
-source $HOME/.bash_profile
+go_dir=/usr/local/go_${go_version}
+export PATH=$PATH:${go_dir}/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
