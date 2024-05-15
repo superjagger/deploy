@@ -6,7 +6,7 @@ source $HOME/.bash_profile
 
 go_version=$1
 if [ -z "$go_version" ]; then
-    echo "缺少变量"
+    echo "缺少变量：go 版本号"
     exit 1
 fi
 go_dir=/usr/local/go_${go_version}
