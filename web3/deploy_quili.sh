@@ -21,7 +21,7 @@ if [ "$1" == "1" ]; then
     sudo systemctl stop ceremonyclient
     rm -rf /lib/systemd/system/ceremonyclient.service
     rm -rf $quili_dir/ceremonyclient
-    rm -rf run_node_sh
+    rm -rf $run_node_sh
     echo "原有数据已清空"
 fi
 
