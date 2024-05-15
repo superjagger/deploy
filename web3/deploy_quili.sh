@@ -53,6 +53,7 @@ ExecStart=/usr/bin/bash run_ceremonyclient_node.sh
 WantedBy=multi-user.target
 EOF
 
+    sudo systemctl daemon-reload
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
 go_dir=/usr/local/go_${go_version}
