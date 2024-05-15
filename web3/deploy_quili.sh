@@ -25,17 +25,20 @@ if [ "$1" == "1" ]; then
     echo "原有数据已清空"
 fi
 
+# 安装go
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
+go_dir=/usr/local/go_${go_version}
+export PATH=$PATH:${go_dir}/go/bin
+
 if [ -f $run_node_sh ]; then
     echo "已部署，只进行服务重启"
     # 进入ceremonyclient/node目录
     cd $quili_dir
 
-    go_dir=/usr/local/go_${go_version}
-    
-    curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
-export PATH=$PATH:${go_dir}/go/bin
+go_dir=/usr/local/go_${go_version}
+export PATH=\$PATH:\${go_dir}/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
@@ -60,10 +63,6 @@ fi
 
 sudo apt update && sudo apt -y upgrade
 sudo apt install git ufw bison screen binutils gcc make bsdmainutils -y
-# 安装go
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
-go_dir=/usr/local/go_${go_version}
-export PATH=$PATH:${go_dir}/go/bin
 
 mkdir -p $quili_dir
 cd $quili_dir
@@ -77,7 +76,7 @@ cd $quili_dir
 # 编写节点启动脚本
 cat >$run_node_sh <<EOF
 go_dir=/usr/local/go_${go_version}
-export PATH=$PATH:${go_dir}/go/bin
+export PATH=\$PATH:\${go_dir}/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
