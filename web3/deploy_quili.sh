@@ -7,6 +7,7 @@
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 
+sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 go_version=1.20.14
 
 if [ "$1" == "1" ]; then
@@ -40,7 +41,7 @@ if [ -f $run_node_sh ]; then
 Description=Ceremony Client GO App Service
 
 [Service]  
-CPUQuota=40%
+CPUQuota=100%
 User=root
 Type=simple
 Restart=always
@@ -52,6 +53,8 @@ ExecStart=/usr/bin/bash run_ceremonyclient_node.sh
 [Install]
 WantedBy=multi-user.target
 EOF
+
+    # 重新加载 systemd 并启用并启动服务
     sudo systemctl daemon-reload
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
@@ -60,7 +63,6 @@ export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
 EOF
-    echo "重启服务"
     sudo systemctl restart ceremonyclient
     exit
 fi
@@ -106,7 +108,7 @@ sudo tee /lib/systemd/system/ceremonyclient.service >/dev/null <<EOF
 Description=Ceremony Client GO App Service
 
 [Service]  
-CPUQuota=40%
+CPUQuota=100%
 User=root
 Type=simple
 Restart=always
