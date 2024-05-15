@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# initia 节点部署脚本
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_initia.sh | bash
+
 # 关闭防火墙
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
 
