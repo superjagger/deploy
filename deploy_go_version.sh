@@ -13,7 +13,7 @@ if [ -z "$go_version" ]; then
 fi
 go_dir=/usr/local/go_${go_version}
 
-export PATH=$PATH:${go_dir}/go/bin
+export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 
 if which go > /dev/null 2>&1; then
     echo "Go ${go_version}已经安装"
@@ -28,7 +28,7 @@ else
         exit 1
     fi
     tar -C ${go_dir} -xzf go${go_version}.linux-amd64.tar.gz
-    export PATH=$PATH:${go_dir}/go/bin
+    export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
     go version
     rm go${go_version}.linux-amd64.tar.gz
 fi
