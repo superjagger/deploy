@@ -31,4 +31,5 @@ else
     export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
     go version
     rm go${go_version}.linux-amd64.tar.gz
+    echo "部署完成，加载go到当前环境请执行：export PATH=\$PATH:${go_dir}/go/bin:\$HOME/go/bin"
 fi
