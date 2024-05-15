@@ -7,7 +7,6 @@
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 
-# 移除环境变量中的go版本
 sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 go_version=1.20.14
 
@@ -31,9 +30,9 @@ if [ -f $run_node_sh ]; then
     # 进入ceremonyclient/node目录
     cd $quili_dir
 
+    go_dir=/usr/local/go_${go_version}
     # 编写节点启动脚本
     cat >$run_node_sh <<EOF
-go_dir=/usr/local/go_${go_version}
 export PATH=$PATH:${go_dir}/go/bin
 cd $quili_dir/ceremonyclient/node
 /usr/bin/bash poor_mans_cd.sh
