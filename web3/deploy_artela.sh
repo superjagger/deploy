@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # artela 节点部署脚本
-# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_artela.sh | bash
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_artela.sh | bash -s -- [节点名称，数字+英文最好]
 
 # 节点配置
 node_name=$1
