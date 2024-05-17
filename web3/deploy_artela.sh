@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # artela 节点部署脚本
-# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_artela.sh | bash -s -- [节点名称，数字+英文最好]
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_artela.sh | bash -s -- [节点名称，数字+英文最好] [是否重装，1 表示重装节点]
 
 # 节点配置
 node_name=$1
@@ -11,11 +11,27 @@ if [ -z "$node_name" ]; then
     exit 1
 fi
 
+
+if [ "$2" -eq 1 ]; then
+    echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
+    sleep 1
+    echo "3"
+    sleep 1
+    echo "2"
+    sleep 1
+    echo "1"
+    sudo systemctl stop artelad
+    rm -rf /lib/systemd/system/artelad.service
+    rm -rf $HOME/.artelad
+fi
+
+
 # 关闭防火墙
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
 
 # 创建文件目录
 artela_dir=$HOME/artela_dir
+
 # 启动脚本
 run_node_sh=$artela_dir/run_artela_node.sh
 
