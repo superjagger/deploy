@@ -27,11 +27,9 @@ if [ "$2" -eq 1 ]; then
     echo "1"
     sudo systemctl stop artelad
     rm -rf /lib/systemd/system/artelad.service
-    sudo systemctl daemon-reload
     rm -rf $HOME/.artelad
     rm -rf $run_node_sh
 fi
-
 
 if [ -f $run_node_sh ]; then
     echo "已部署 artelad ，只进行服务重启"
@@ -73,7 +71,7 @@ sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.artelad/
 
 # 下载快照
 mv $HOME/.artelad/data/priv_validator_state.json $HOME/.artelad/priv_validator_state.json.backup
-curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/artela-testnet_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.artelad
+curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/artela-testnet_latest.tar.lz4 >artela_download.log 2>&1 | lz4 -dc - | tar -xf - -C $HOME/.artelad
 mv $HOME/.artelad/priv_validator_state.json.backup $HOME/.artelad/data/priv_validator_state.json
 
 cd $artela_dir
@@ -112,5 +110,9 @@ sudo systemctl daemon-reload
 sudo systemctl enable artelad
 sudo systemctl restart artelad
 sudo systemctl status artelad
-# sudo systemctl stop artelad
+# sudo systemctl stop artela
 # journalctl -u artelad -f -n 10
+
+echo "部署结束"
+sleep 5
+journalctl -u artelad -n 10 --no-pager
