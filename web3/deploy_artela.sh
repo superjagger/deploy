@@ -27,6 +27,7 @@ if [ "$2" -eq 1 ]; then
     echo "1"
     sudo systemctl stop artelad
     rm -rf /lib/systemd/system/artelad.service
+    sudo systemctl daemon-reload
     rm -rf $HOME/.artelad
     rm -rf $run_node_sh
 fi
