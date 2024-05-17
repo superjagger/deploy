@@ -11,6 +11,11 @@ if [ -z "$node_name" ]; then
     exit 1
 fi
 
+# 创建文件目录
+artela_dir=$HOME/artela_dir
+mkdir -p $artela_dir
+# 启动脚本
+run_node_sh=$artela_dir/run_artela_node.sh
 
 if [ "$2" -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
@@ -23,17 +28,9 @@ if [ "$2" -eq 1 ]; then
     sudo systemctl stop artelad
     rm -rf /lib/systemd/system/artelad.service
     rm -rf $HOME/.artelad
+    rm -rf $run_node_sh
 fi
 
-
-# 关闭防火墙
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
-
-# 创建文件目录
-artela_dir=$HOME/artela_dir
-
-# 启动脚本
-run_node_sh=$artela_dir/run_artela_node.sh
 
 if [ -f $run_node_sh ]; then
     echo "已部署 artelad ，只进行服务重启"
@@ -42,7 +39,8 @@ if [ -f $run_node_sh ]; then
     exit
 fi
 
-mkdir -p $artela_dir
+# 关闭防火墙
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/stop_firewall.sh | bash
 
 # 更新和安装必要的软件
 sudo apt update && sudo apt upgrade -y
