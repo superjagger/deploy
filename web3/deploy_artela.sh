@@ -21,6 +21,8 @@ if [ -z "$clear" ]; then
     clear=0
 fi
 
+echo "传入参数: $node_name $chear"
+
 if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
     sleep 1
