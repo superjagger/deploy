@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # debian 系统
-# 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_taiko.sh | bash -s -- "钱包地址" "私钥" "Ethereum Holskey HTTP RPC连接" "Ethereum Holskey WS RPC连接" "Beacon Holskey RPC连接" "prover_endpoints 地址" "不输入或者0表示保留数据，否则是清空数据"
+# 部署taiko验证者节点，命令行: curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_taiko.sh | bash -s -- "钱包地址" "私钥" "Ethereum Holskey HTTP RPC连接" "Ethereum Holskey WS RPC连接" "Beacon Holskey RPC连接" "prover_endpoints 地址" "输入1表示清空数据"
 # 可以用下面的公共rpc地址
 # http_rpc=https://ethereum-holesky-rpc.publicnode.com
 # ws_rpc=wss://ethereum-holesky-rpc.publicnode.com
@@ -22,8 +22,8 @@ else
     clear=$7
 fi
 
-if [ "$clear" -ne 0 ]; then
-    echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
+if [ $clear -eq 1 ]; then
+    echo "本次脚本会删除原有数据，如果不想删除及时退出脚本！"
     sleep 1
     echo "3"
     sleep 1
@@ -80,7 +80,7 @@ sed -i "s|PORT_L2_EXECUTION_ENGINE_METRICS=.*|PORT_L2_EXECUTION_ENGINE_METRICS=6
 echo "停止 Taiko 容器"
 docker compose --profile l2_execution_engine down
 docker stop simple-taiko-node-taiko_client_proposer-1 && docker rm simple-taiko-node-taiko_client_proposer-1
-if [ "$clear" -ne 0 ]; then
+if [ $clear -eq 1 ]; then
     echo "删除原有数据"
     docker volume rm simple-taiko-node_grafana_data simple-taiko-node_l2_execution_engine_data simple-taiko-node_prometheus_data simple-taiko-node_zkevm_chain_prover_rpcd_data
 fi
