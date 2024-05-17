@@ -17,6 +17,9 @@ mkdir -p $artela_dir
 # 启动脚本
 run_node_sh=$artela_dir/run_artela_node.sh
 clear=$2
+if [ -z "$clear" ]; then
+    clear=0
+fi
 
 if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
