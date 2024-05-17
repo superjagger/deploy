@@ -88,5 +88,6 @@ docker compose --profile l2_execution_engine up -d
 
 echo "运行 Taiko proposer 节点"
 docker compose up taiko_client_proposer -d
-docker logs -n 10 simple-taiko-node-taiko_client_proposer-1
 echo "结束部署taiko验证者节点"
+sleep 5
+docker logs -n 10 simple-taiko-node-taiko_client_proposer-1
