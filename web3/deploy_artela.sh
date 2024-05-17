@@ -16,8 +16,9 @@ artela_dir=$HOME/artela_dir
 mkdir -p $artela_dir
 # 启动脚本
 run_node_sh=$artela_dir/run_artela_node.sh
+clear=$2
 
-if [ "$2" -eq 1 ]; then
+if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
     sleep 1
     echo "3"
@@ -32,7 +33,7 @@ if [ "$2" -eq 1 ]; then
     rm -rf $run_node_sh
 fi
 
-if [ -f $run_node_sh ]; then
+if [ -f /lib/systemd/system/artelad.service ]; then
     echo "已部署 artelad ，只进行服务重启"
     sudo systemctl restart artelad
     echo "成功重启"
