@@ -28,6 +28,7 @@ if [ "$2" -eq 1 ]; then
     sudo systemctl stop artelad
     rm -rf /lib/systemd/system/artelad.service
     rm -rf $HOME/.artelad
+    rm -rf $artela_dir/artela
     rm -rf $run_node_sh
 fi
 
@@ -71,7 +72,7 @@ sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.artelad/
 
 # 下载快照
 mv $HOME/.artelad/data/priv_validator_state.json $HOME/.artelad/priv_validator_state.json.backup
-curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/artela-testnet_latest.tar.lz4 >artela_download.log 2>&1 | lz4 -dc - | tar -xf - -C $HOME/.artelad
+curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/artela-testnet_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.artelad
 mv $HOME/.artelad/priv_validator_state.json.backup $HOME/.artelad/data/priv_validator_state.json
 
 cd $artela_dir
