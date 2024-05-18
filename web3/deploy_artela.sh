@@ -6,6 +6,8 @@
 # 节点配置
 node_name=$1
 
+node_address="tcp://127.0.0.1:3457"
+
 if [ -z "$node_name" ]; then
     echo "缺少参数"
     exit 1
@@ -20,8 +22,6 @@ clear=$2
 if [ -z "$clear" ]; then
     clear=0
 fi
-
-echo "传入参数: $node_name $chear"
 
 if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
@@ -65,11 +65,15 @@ make install
 
 artelad config chain-id artela_11822-1
 artelad init "$node_name" --chain-id artela_11822-1
-artelad config node tcp://localhost:3457
+artelad config node $node_address
 
 # 获取初始文件和地址簿
 curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/genesis.json >$HOME/.artelad/config/genesis.json
 curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/addrbook.json >$HOME/.artelad/config/addrbook.json
+
+# 配置端口
+sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:3458\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"$node_address\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:3460\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:3456\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":3466\"%" $HOME/.artelad/config/config.toml
+sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:3417\"%; s%^address = \":8080\"%address = \":3480\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:3490\"%; s%^address = \"localhost:9091\"%address = \"0.0.0.0:3491\"%; s%:8545%:3445%; s%:8546%:3446%; s%:6065%:3465%" $HOME/.artelad/config/app.toml
 
 # 配置节点
 SEEDS=""
@@ -117,7 +121,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable artelad
 sudo systemctl restart artelad
 sudo systemctl status artelad
-# sudo systemctl stop artela
+# sudo systemctl stop artelad
 # journalctl -u artelad -f -n 10
 
 echo "部署结束"
