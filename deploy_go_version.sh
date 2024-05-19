@@ -4,7 +4,7 @@
 # go_version=1.20.14 # 设定go版本号
 # curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
 # go_dir=/usr/local/go_${go_version}
-# export PATH=$PATH:${go_dir}/go/bin # 将go的目录临时添加到环境变量中，只保存当前命令行窗口
+# export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin # 将go的目录临时添加到环境变量中，只保存当前命令行窗口
 
 go_version=$1
 if [ -z "$go_version" ]; then
