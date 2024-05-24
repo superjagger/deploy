@@ -19,6 +19,8 @@ source $HOME/.bash_profile
 # 安装基础组件
 apt-get install git
 
+
+echo "下载源码，部署节点"
 ########### 启动节点 ###########
 # 下载源码
 cd $juneo_dir
@@ -52,6 +54,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
 
 ########### 转入水 ###########
+echo "转水，准备成为职业者"
 cd $juneo_dir
 git clone https://github.com/Juneo-io/juneojs-examples
 cd juneojs-examples
@@ -59,3 +62,4 @@ npm install
 # 写入助记词，为后续成为验证者做准备
 echo "MNEMONIC=\"${mnemonic}\"" > .env
 # 转水
+echo "还没领水脚本待完成"
