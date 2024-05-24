@@ -21,6 +21,7 @@ apt-get install git
 ########### 启动节点 ###########
 # 下载源码
 cd $juneo_dir
+rm -rf juneogo-docker
 git clone https://github.com/Juneo-io/juneogo-docker
 cd juneogo-docker
 # 放开端口注释
