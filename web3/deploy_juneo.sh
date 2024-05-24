@@ -35,6 +35,22 @@ echo "部署结束"
 sleep 5
 docker logs -f juneogo -n 10
 
+echo "启动状态"
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.isBootstrapped",
+    "params": {
+        "chain":"JUNE"
+    }
+}' -H 'content-type:application/json;' 192.168.10.2:9650/ext/info
+echo "查询 node-id"
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
+
 ########### 转入水 ###########
 cd $juneo_dir
 git clone https://github.com/Juneo-io/juneojs-examples
