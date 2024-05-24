@@ -31,14 +31,15 @@ docker compose build
 docker compose up -d juneogo
 sudo chown -R root juneogo/.juneogo/
 
+echo "部署结束"
 sleep 5
 docker logs -f juneogo -n 10
 
 ########### 转入水 ###########
-# cd $juneo_dir
-# git clone https://github.com/Juneo-io/juneojs-examples
-# cd juneojs-examples
-# npm install
-# # 写入助记词
-# echo "MNEMONIC=\"${mnemonic}\"" > .env
-# # 转水
+cd $juneo_dir
+git clone https://github.com/Juneo-io/juneojs-examples
+cd juneojs-examples
+npm install
+# 写入助记词，为后续成为验证者做准备
+echo "MNEMONIC=\"${mnemonic}\"" > .env
+# 转水
