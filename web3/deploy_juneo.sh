@@ -19,10 +19,14 @@ source $HOME/.bash_profile
 # 安装基础组件
 apt-get install git
 
+# 检查是否有运行的juneogo容器
 if [[ -n $(docker ps -q -f "name=^juneogo$") ]]; then
-    echo "节点已经部署"
+    echo "juneogo节点已经部署"
     exit
 fi
+
+# 删除所有juneogo容器
+docker rm $(sudo docker ps -a -q -f "name=^.*juneogo$" | awk '{print $1}')
 
 echo "下载源码，部署节点"
 ########### 启动节点 ###########
