@@ -34,7 +34,7 @@ sudo chown -R root juneogo/.juneogo/
 
 echo "部署结束"
 sleep 5
-docker logs -f juneogo -n 10
+docker logs juneogo -n 10
 
 echo "启动状态"
 curl -X POST --data '{
