@@ -25,8 +25,8 @@ if [[ -n $(docker ps -q -f "name=^juneogo$") ]]; then
     exit
 fi
 
-# 删除所有juneogo容器
-docker rm $(sudo docker ps -a -q -f "name=^.*juneogo$" | awk '{print $1}')
+# 删除所有未运行的juneogo容器
+sudo docker rm `docker ps -a -f "name=^.*juneogo$"|grep -E "Exited|Create"|awk '{print $1}'`
 
 echo "下载源码，部署节点"
 ########### 启动节点 ###########
