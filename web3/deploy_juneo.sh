@@ -4,6 +4,7 @@
 # curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_juneo.sh | bash -s -- "[助记词]"
 
 mnemonic=$1
+echo "部署助记词: ${mnemonic}"
 
 juneo_dir=$HOME/juneo_dir
 mkdir -p $juneo_dir
