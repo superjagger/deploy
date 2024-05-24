@@ -19,6 +19,10 @@ source $HOME/.bash_profile
 # 安装基础组件
 apt-get install git
 
+if [[ -n $(docker ps -q -f "name=^juneogo$") ]]; then
+    echo "节点已经部署"
+    exit
+fi
 
 echo "下载源码，部署节点"
 ########### 启动节点 ###########
@@ -60,6 +64,6 @@ git clone https://github.com/Juneo-io/juneojs-examples
 cd juneojs-examples
 npm install
 # 写入助记词，为后续成为验证者做准备
-echo "MNEMONIC=\"${mnemonic}\"" > .env
+echo "MNEMONIC=\"${mnemonic}\"" >.env
 # 转水
 echo "还没领水脚本待完成"
