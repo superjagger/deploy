@@ -38,7 +38,7 @@ if [ $clear -eq 1 ]; then
     rm -rf $run_node_sh
 fi
 
-if [ -f /lib/systemd/system/artelad.service ]; then
+if [ -f /lib/systemd/system/artelad.service ] && [ -f $HOME/go/bin/artelad ]; then
     echo "已部署 artelad ，只进行服务重启..."
     
     sudo systemctl restart artelad
