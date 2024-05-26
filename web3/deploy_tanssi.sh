@@ -47,6 +47,9 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 if [[ -n $(docker ps -a -q -f "name=tanssi") ]]; then
     echo "tanssi节点已经部署，只进行启动服务"
     docker start tanssi
+
+    sleep 5
+    docker logs -n 20 tanssi
     exit
 fi
 
@@ -78,4 +81,4 @@ docker run -d --network="host" --name tanssi -v "$tanssi_data:/data" \
     --database paritydb
 
 sleep 5
-docker logs -n 10 tanssi
+docker logs -n 20 tanssi
