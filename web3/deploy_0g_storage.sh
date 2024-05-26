@@ -24,9 +24,10 @@ if [ $clear -eq 1 ]; then
     sudo systemctl stop 0g_storage_node
     rm -rf /lib/systemd/system/0g_storage_node.service
     rm -rf $og_dir/0g-storage-node
+    rm -rf $run_node_sh
 fi
 
-if [ -f $run_node_sh ]; then
+if [ -f $run_node_sh ] && [ -f /lib/systemd/system/0g_storage_node.service ]; then
     echo "已部署 0g 服务，只修改秘钥，重启服务"
     echo "进入目录：$og_dir/0g-storage-node/run"
     cd $og_dir/0g-storage-node/run
