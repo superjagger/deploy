@@ -7,6 +7,7 @@ source $HOME/.bash_profile
 
 if which docker >/dev/null 2>&1; then
     echo "Docker 已经安装"
+    systemctl start docker
 else
     echo "Docker 未安装"
 
