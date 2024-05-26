@@ -31,6 +31,7 @@ if [ -f $run_node_sh ]; then
     echo "进入目录：$og_dir/0g-storage-node/run"
     cd $og_dir/0g-storage-node/run
     sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
+    sudo systemctl daemon-reload
     sudo systemctl restart 0g_storage_node
     echo "成功重启"
     exit
