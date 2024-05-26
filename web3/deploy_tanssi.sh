@@ -9,6 +9,7 @@ producer_name=$2
 # 中继链名称
 relay_node_name=$3
 
+echo "$node_name  $producer_name  $relay_node_name"
 
 if [ -z "$relay_node_name" ]; then
     echo "缺少参数"
