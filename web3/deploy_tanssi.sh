@@ -10,7 +10,7 @@ producer_name=$2
 relay_node_name=$3
 
 
-if [ -z "$deploy_filename" ]; then
+if [ -z "$relay_node_name" ]; then
     echo "缺少参数"
     exit 1
 fi
