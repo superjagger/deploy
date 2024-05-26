@@ -23,7 +23,7 @@ if [ $clear -eq 1 ]; then
     echo "1"
     sudo systemctl stop 0g_storage_node
     rm -rf /lib/systemd/system/0g_storage_node.service
-    rm -rf $og_dir
+    rm -rf $og_dir/0g-storage-node
 fi
 
 if [ -f $run_node_sh ]; then
