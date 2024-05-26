@@ -52,3 +52,6 @@ docker run -d --network="host" --name tanssi -v "$tanssi_data:/data" \
     --blocks-pruning=2000 \
     --telemetry-url='wss://telemetry.polkadot.io/submit/ 0' \
     --database paritydb
+
+sleep 5 
+docker logs -n 10 tanssi
