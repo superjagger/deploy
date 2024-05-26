@@ -28,6 +28,7 @@ fi
 
 if [ -f $run_node_sh ]; then
     echo "已部署 0g 服务，只修改秘钥，重启服务"
+    echo "进入目录：$og_dir/0g-storage-node/run"
     cd $og_dir/0g-storage-node/run
     sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
     sudo systemctl restart 0g_storage_node
