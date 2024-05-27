@@ -98,6 +98,7 @@ echo "部署结束"
 sleep 5
 docker logs juneogo -n 10
 # 容器带宽限速 5mb/s
+echo "限制容器网速"
 docker exec juneogo apt-get update && apt-get install -y wondershaper && wondershaper eth0 25600 25600 
 
 echo "启动状态"
