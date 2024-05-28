@@ -45,6 +45,8 @@ if [ -f $run_node_sh ] && [ -f /lib/systemd/system/0g_storage_node.service ]; th
     sudo systemctl daemon-reload
     sudo systemctl restart 0g_storage_node
     echo "成功重启"
+    sleep 5
+    tail -n 20 "$(find $og_dir/0g-storage-node/run/log/ -type f -printf '%T+ %p\n' | sort -r | head -n 1 | cut -d' ' -f2-)"
     exit
 fi
 
@@ -107,3 +109,6 @@ sudo systemctl enable 0g_storage_node
 sudo systemctl restart 0g_storage_node
 sudo systemctl status 0g_storage_node
 # sudo systemctl stop 0g_storage_node
+
+sleep 5
+tail -n 20 "$(find $og_dir/0g-storage-node/run/log/ -type f -printf '%T+ %p\n' | sort -r | head -n 1 | cut -d' ' -f2-)"
