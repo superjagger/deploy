@@ -4,7 +4,8 @@
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_0g_storage.sh | bash -s -- [私钥，去掉0x开头] [是否重装，1 表示重装节点]
 
 private_key=$1
-clear=$2
+rpc=$2
+clear=$3
 
 og_dir=$HOME/0g_dir
 run_node_sh=$og_dir/run_0g_storage_node.sh
@@ -12,6 +13,14 @@ run_node_sh=$og_dir/run_0g_storage_node.sh
 if [ -z "$clear" ]; then
     clear=0
 fi
+
+if [ -z "$rpc" ]; then
+    rpc=https://jsonrpc.oneiricts.com:8445
+fi
+
+echo "秘钥: $private_key"
+echo "rpc: $rpc"
+echo "是否清理数据: $clear"
 
 if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
@@ -32,6 +41,7 @@ if [ -f $run_node_sh ] && [ -f /lib/systemd/system/0g_storage_node.service ]; th
     echo "进入目录：$og_dir/0g-storage-node/run"
     cd $og_dir/0g-storage-node/run
     sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
+    sed -i "s|blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = \"$rpc\"|" config.toml
     sudo systemctl daemon-reload
     sudo systemctl restart 0g_storage_node
     echo "成功重启"
@@ -96,4 +106,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable 0g_storage_node
 sudo systemctl restart 0g_storage_node
 sudo systemctl status 0g_storage_node
-# sudo systemctl stop initiad
+# sudo systemctl stop 0g_storage_node
