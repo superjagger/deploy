@@ -46,7 +46,7 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 # 检查是否有部署的tanssi容器
 if [[ -n $(docker ps -a -q -f "name=tanssi") ]]; then
     echo "tanssi节点已经部署，只进行启动服务"
-    docker restart tanssi
+    docker start tanssi
     sleep 5
     docker logs -n 20 tanssi
     exit
