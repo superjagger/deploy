@@ -15,7 +15,7 @@ if [ -z "$clear" ]; then
 fi
 
 if [ -z "$rpc" ]; then
-    rpc=https://jsonrpc.oneiricts.com:8445
+    rpc=http://194.147.58.85:22445
 fi
 
 echo "秘钥: $private_key"
@@ -32,7 +32,7 @@ if [ $clear -eq 1 ]; then
     echo "1"
     sudo systemctl stop 0g_storage_node
     rm -rf /lib/systemd/system/0g_storage_node.service
-    rm -rf $og_dir/0g-storage-node
+    rm -rf $og_dir/0g-storage-node/run/db/*
     rm -rf $run_node_sh
 fi
 
@@ -63,16 +63,20 @@ export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin # 将go的目录临时添加到�
 
 # 下载源码，编译源码
 cd $og_dir
-git clone -b v0.2.0 https://github.com/0glabs/0g-storage-node.git
-cd 0g-storage-node
-git submodule update --init
-cargo build --release
+if [ ! -d "0g-storage-node" ]; then
+    git clone -b v0.2.0 https://github.com/0glabs/0g-storage-node.git
+    cd 0g-storage-node
+    git submodule update --init
+    cargo build --release
+else
+    cd 0g-storage-node
+fi
 
 # 配置私钥与其他配置数据
 cd run
 sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
-sed -i 's|blockchain_rpc_endpoint = "https://rpc-testnet.0g.ai"|blockchain_rpc_endpoint = "https://evm-rpc-0gchain.dadunode.com"|g' config.toml
-sed -i 's/log_sync_start_block_number = 80981/log_sync_start_block_number = 223989/' config.toml
+sed -i "s|blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = \"${rpc}\"|g" config.toml
+sed -i 's/log_sync_start_block_number = .*/log_sync_start_block_number = 403000/' config.toml
 
 # 配置运行文件
 cd $og_dir
@@ -84,7 +88,7 @@ cd 0g-storage-node/run
 EOF
 
 # 写入服务
-sudo tee /lib/systemd/system/0g_storage_node.service >/dev/null <<EOF
+sudo cat >/lib/systemd/system/0g_storage_node.service <<EOF
 [Unit]
 Description=0g storage Service
 
@@ -111,4 +115,4 @@ sudo systemctl status 0g_storage_node
 # sudo systemctl stop 0g_storage_node
 
 sleep 5
-tail -n 20 "$(find $og_dir/0g-storage-node/run/log/ -type f -printf '%T+ %p\n' | sort -r | head -n 1 | cut -d' ' -f2-)"
+tail -n 100 "$(find $og_dir/0g-storage-node/run/log/ -type f -printf '%T+ %p\n' | sort -r | head -n 1 | cut -d' ' -f2-)" 
