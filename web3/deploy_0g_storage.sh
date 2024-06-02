@@ -42,6 +42,7 @@ if [ -f $run_node_sh ] && [ -f /lib/systemd/system/0g_storage_node.service ]; th
     cd $og_dir/0g-storage-node/run
     sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
     sed -i "s|blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = \"$rpc\"|" config.toml
+    sudo systemctl status 0g_storage_node
     sudo systemctl daemon-reload
     sudo systemctl restart 0g_storage_node
     echo "成功重启"
