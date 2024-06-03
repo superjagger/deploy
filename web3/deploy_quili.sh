@@ -37,9 +37,9 @@ if [ -f $run_node_sh ]; then
     output=$(systemctl is-active ${service_name})
     # 判断输出是否为 "active"，从而确定服务是否启用
     if [ "$output" = "active" ]; then
-        echo "${hostname} ${service_name} 服务已启用"
+        echo "${service_name} 服务已启用"
     else
-        echo "${hostname} ${service_name} 服务没有启用，重启服务"
+        echo "${service_name} 服务没有启用，重启服务"
         # 进入ceremonyclient/node目录
         cd $quili_dir
         sudo systemctl start ceremonyclient
