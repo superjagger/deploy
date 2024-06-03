@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # quili 节点部署脚本
-# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s --
 # 清除原有数据部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s -- 1
 
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 
 sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
-go_version=1.20.14
 
 if [ "$1" == "1" ]; then
     echo "准备清空原有节点重新部署，如果不想请及时终止脚本"
@@ -26,6 +25,7 @@ if [ "$1" == "1" ]; then
 fi
 
 # 安装go
+go_version=1.20.14
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_go_version.sh | bash -s -- $go_version
 go_dir=/usr/local/go_${go_version}
 export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
@@ -37,9 +37,9 @@ if [ -f $run_node_sh ]; then
     output=$(systemctl is-active ${service_name})
     # 判断输出是否为 "active"，从而确定服务是否启用
     if [ "$output" = "active" ]; then
-        echo "${service_name} 服务已启用"
+        echo "${hostname} ${service_name} 服务已启用"
     else
-        echo "${service_name} 服务没有启用，重启服务"
+        echo "${hostname} ${service_name} 服务没有启用，重启服务"
         # 进入ceremonyclient/node目录
         cd $quili_dir
         sudo systemctl start ceremonyclient
