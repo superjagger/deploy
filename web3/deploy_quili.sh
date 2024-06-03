@@ -31,12 +31,21 @@ go_dir=/usr/local/go_${go_version}
 export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 
 if [ -f $run_node_sh ]; then
-    echo "已部署，只进行服务重启"
-    # 进入ceremonyclient/node目录
-    cd $quili_dir
-    sudo systemctl start ceremonyclient
-    sudo systemctl status ceremonyclient
-    echo "成功重启"
+    echo "已部署"
+    # 判断服务是否运行
+    service_name=ceremonyclient
+    output=$(systemctl is-active ${service_name})
+    # 判断输出是否为 "active"，从而确定服务是否启用
+    if [ "$output" = "active" ]; then
+        echo "${hostname} ${service_name} 服务已启用"
+    else
+        echo "${hostname} ${service_name} 服务没有启用，重启服务"
+        # 进入ceremonyclient/node目录
+        cd $quili_dir
+        sudo systemctl start ceremonyclient
+        sudo systemctl status ceremonyclient
+        echo "成功重启"
+    fi
     sleep 5
     journalctl -u ceremonyclient -n 10 --no-pager
     exit
@@ -103,3 +112,6 @@ sudo systemctl restart ceremonyclient
 sudo systemctl status ceremonyclient
 # sudo systemctl stop ceremonyclient
 # journalctl -u ceremonyclient -f -n 10
+
+sleep 5
+journalctl -u ceremonyclient -n 10 --no-pager
