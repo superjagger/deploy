@@ -80,6 +80,7 @@ sudo systemctl restart ${service_name}
 sudo systemctl status ${service_name}
 
 # 绑定id
+sleep 10
 cd $titan_dir/titan_v0.1.18_linux_amd64
 ./titan-edge bind --hash=${node_id} https://api-test1.container1.titannet.io/api/v2/device/binding
 
