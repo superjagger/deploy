@@ -34,36 +34,10 @@ if [ -f $run_node_sh ]; then
     echo "已部署，只进行服务重启"
     # 进入ceremonyclient/node目录
     cd $quili_dir
-
-    # 写入服务
-    sudo tee /lib/systemd/system/ceremonyclient.service >/dev/null <<EOF
-[Unit]
-Description=Ceremony Client GO App Service
-
-[Service]  
-CPUQuota=200%
-User=root
-Type=simple
-Restart=always
-RestartSec=5S
-WorkingDirectory=${quili_dir}
-Environment=GOEXPERIMENT=arenas
-ExecStart=/usr/bin/bash run_ceremonyclient_node.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-    # 重新加载 systemd 并启用并启动服务
-    sudo systemctl daemon-reload
-    # 编写节点启动脚本
-    cat >$run_node_sh <<EOF
-go_dir=/usr/local/go_${go_version}
-export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
-cd $quili_dir/ceremonyclient/node
-/usr/bin/bash poor_mans_cd.sh
-EOF
-    sudo systemctl restart ceremonyclient
+    sudo systemctl start ceremonyclient
+    sudo systemctl status ceremonyclient
+    sleep 5
+    journalctl -u ceremonyclient -n 10 --no-pager
     exit
 fi
 
