@@ -69,14 +69,15 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable ${service_name}
 sudo systemctl restart ${service_name}
-sudo systemctl status ${service_name}
 # sudo systemctl stop ${service_name}
 # journalctl -u ${service_name} -f -n 10
 
+sleep 3
 # 修改端口避免端口冲突
 sed -i 's/.*#\?.*ListenAddress = .*/  ListenAddress = "0.0.0.0:1888"/' ~/.titanedge/config.toml
 # 重启服务
 sudo systemctl restart ${service_name}
+sudo systemctl status ${service_name}
 
 # 绑定id
 cd $titan_dir/titan_v0.1.18_linux_amd64
