@@ -30,6 +30,10 @@ if [ -f $run_node_sh ]; then
         sudo systemctl start ${service_name}
         echo "成功重启"
     fi
+
+    cd $titan_dir/titan_v0.1.18_linux_amd64
+    ./titan-edge bind --hash=${node_id} https://api-test1.container1.titannet.io/api/v2/device/binding
+    
     sleep 10
     sudo systemctl status ${service_name}
     journalctl -u ${service_name} -n 10 --no-pager
