@@ -36,6 +36,7 @@ if [ -f $run_node_sh ]; then
     cd $quili_dir
     sudo systemctl start ceremonyclient
     sudo systemctl status ceremonyclient
+    echo "成功重启"
     sleep 5
     journalctl -u ceremonyclient -n 10 --no-pager
     exit
