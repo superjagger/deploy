@@ -24,6 +24,9 @@ if [ -f $run_node_sh ]; then
         echo "${service_name} 服务已启用"
     else
         echo "${service_name} 服务没有启用，重启服务"
+        # 修改端口避免端口冲突
+        sed -i 's/.*#\?.*ListenAddress = .*/  ListenAddress = "0.0.0.0:1888"/' ~/.titanedge/config.toml
+        # 启动服务
         cd $titan_dir
         sudo systemctl start ${service_name}
         echo "成功重启"
