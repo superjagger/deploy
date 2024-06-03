@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# quili 节点部署脚本
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_titan.sh | bash -s -- [node_id]
 
 node_id=$1
@@ -25,15 +24,14 @@ if [ -f $run_node_sh ]; then
         echo "${service_name} 服务已启用"
     else
         echo "${service_name} 服务没有启用，重启服务"
-        # 进入ceremonyclient/node目录
-        cd $quili_dir
+        cd $titan_dir
         sudo systemctl start ${service_name}
         echo "成功重启"
     fi
 
     cd $titan_dir/titan_v0.1.18_linux_amd64
     ./titan-edge bind --hash=${node_id} https://api-test1.container1.titannet.io/api/v2/device/binding
-    
+
     sleep 10
     sudo systemctl status ${service_name}
     journalctl -u ${service_name} -n 10 --no-pager
@@ -90,4 +88,4 @@ cd $titan_dir/titan_v0.1.18_linux_amd64
 
 # 输出运行日志
 sleep 5
-journalctl -u ceremonyclient -n 10 --no-pager
+journalctl -u ${service_name} -n 10 --no-pager
