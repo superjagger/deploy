@@ -69,7 +69,7 @@ else
 fi
 
 sudo apt update && sudo apt -y upgrade
-sudo apt install git ufw bison screen binutils gcc make bsdmainutils -y
+sudo apt install git ufw bison screen binutils gcc make bsdmainutils cpulimit gawk -y
 
 mkdir -p $quili_dir
 cd $quili_dir
