@@ -2,15 +2,17 @@
 
 # quili 节点部署脚本
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s --
-# 清除原有数据部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s -- 1
+# 备份原有数据重新部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_quili.sh | bash -s -- 1
 
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
+service_name=ceremonyclient
 
+# 删除环境变量中的go配置
 sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 
 if [ "$1" == "1" ]; then
-    echo "准备清空原有节点重新部署，如果不想请及时终止脚本"
+    echo "备份原有节点重新部署，如果不想请及时终止脚本"
     sleep 2
     echo "3"
     sleep 2
@@ -19,9 +21,10 @@ if [ "$1" == "1" ]; then
     echo "1"
     sudo systemctl stop ceremonyclient
     rm -rf /lib/systemd/system/ceremonyclient.service
-    rm -rf $quili_dir/ceremonyclient
+    sudo systemctl daemon-reload
+    mv $quili_dir/ceremonyclient $quili_dir/ceremonyclient_bak_$(date +%s)
     rm -rf $run_node_sh
-    echo "原有数据已清空"
+    echo "原有数据已备份"
 fi
 
 # 安装go
@@ -33,7 +36,6 @@ export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 if [ -f $run_node_sh ]; then
     echo "已部署"
     # 判断服务是否运行
-    service_name=ceremonyclient
     output=$(systemctl is-active ${service_name})
     # 判断输出是否为 "active"，从而确定服务是否启用
     if [ "$output" = "active" ]; then
@@ -73,7 +75,7 @@ mkdir -p $quili_dir
 cd $quili_dir
 
 # 克隆仓库
-git clone https://github.com/quilibriumnetwork/ceremonyclient
+git clone https://github.com/a3165458/ceremonyclient.git
 
 # 进入ceremonyclient/node目录
 cd $quili_dir
@@ -83,13 +85,13 @@ cat >$run_node_sh <<EOF
 go_dir=/usr/local/go_${go_version}
 export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
-/usr/bin/bash poor_mans_cd.sh
+/usr/bin/bash release_autorun.sh
 EOF
 
 # 写入服务
-sudo tee /lib/systemd/system/ceremonyclient.service >/dev/null <<EOF
+sudo cat >/lib/systemd/system/${service_name}.service <<EOF
 [Unit]
-Description=Ceremony Client GO App Service
+Description=${service_name} Service
 
 [Service]  
 CPUQuota=200%
@@ -99,7 +101,7 @@ Restart=always
 RestartSec=5S
 WorkingDirectory=${quili_dir}
 Environment=GOEXPERIMENT=arenas
-ExecStart=/usr/bin/bash run_ceremonyclient_node.sh
+ExecStart=/usr/bin/bash $run_node_sh
 
 [Install]
 WantedBy=multi-user.target
