@@ -74,8 +74,10 @@ sudo apt install git ufw bison screen binutils gcc make bsdmainutils cpulimit ga
 mkdir -p $quili_dir
 cd $quili_dir
 
-# 克隆仓库
+# 克隆仓库，切换分支
 git clone https://github.com/a3165458/ceremonyclient.git
+cd ceremonyclient/node 
+git switch release
 
 # 进入ceremonyclient/node目录
 cd $quili_dir
