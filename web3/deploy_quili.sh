@@ -8,6 +8,7 @@ quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
 service_name=ceremonyclient
 
+mkdir -p $quili_dir
 # 删除环境变量中的go配置
 sed -i '/\/usr\/local\/go\/bin/d' ~/.bash_profile
 
@@ -71,7 +72,6 @@ fi
 sudo apt update && sudo apt -y upgrade
 sudo apt install git ufw bison screen binutils gcc make bsdmainutils cpulimit gawk -y
 
-mkdir -p $quili_dir
 cd $quili_dir
 
 # 克隆仓库，切换分支
