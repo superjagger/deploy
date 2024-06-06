@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_titan.sh | bash -s -- [node_name]
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_warden.sh | bash -s -- [node_name]
 
 node_name=$1
 
