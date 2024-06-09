@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_warden.sh | bash -s -- [node_name]
+# 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_warden.sh | bash -s -- [node_name] [输入1清空数据]
 
 node_name=$1
 
@@ -14,6 +14,22 @@ mkdir -p $node_dir
 
 run_node_sh=$node_dir/run_warden_node.sh
 service_name=warden
+service_file=/lib/systemd/system/${service_name}.service
+
+if [ $2 -eq 1 ]; then
+    echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
+    sleep 1
+    echo "3"
+    sleep 1
+    echo "2"
+    sleep 1
+    echo "1"
+    sudo systemctl stop ${service_name}
+    rm $run_node_sh
+    rm $service_file
+    sudo systemctl daemon-reload
+    rm -rf $HOME/.warden
+fi
 
 if [ -f $run_node_sh ]; then
     echo "${service_name} 已部署"
@@ -78,7 +94,6 @@ sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025uward\"/;
 # 下载快照
 curl -o - -L https://config-t.noders.services/warden/data.tar.lz4 | lz4 -d | tar -x -C ~/.warden
 
-
 # 编辑启动命令
 cat >$run_node_sh <<EOF
 export PATH=\$PATH:${go_dir}/go/bin:\$HOME/go/bin 
@@ -88,7 +103,7 @@ wardend start
 EOF
 
 # 写入服务
-cat >/lib/systemd/system/${service_name}.service <<EOF
+cat >$service_file <<EOF
 [Unit]
 Description=${service_name} Service
 
