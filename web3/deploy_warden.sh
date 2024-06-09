@@ -97,7 +97,6 @@ curl -o - -L https://config-t.noders.services/warden/data.tar.lz4 | lz4 -d | tar
 # 编辑启动命令
 cat >$run_node_sh <<EOF
 export PATH=\$PATH:${go_dir}/go/bin:\$HOME/go/bin 
-cd $node_dir/wardend
 # 启动节点
 wardend start
 EOF
