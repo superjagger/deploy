@@ -52,8 +52,7 @@ fi
 
 # 安装前置
 sudo apt-get update
-sudo apt-get install clang cmake build-essential git screen cargo -y
-sudo apt-get install git -y
+sudo apt-get install clang cmake build-essential git screen lz4 cargo -y
 
 # 安装go
 go_version=1.22.2 # 设定go版本号
