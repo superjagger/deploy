@@ -29,6 +29,9 @@ git clone https://github.com/ritual-net/infernet-node
 cd infernet-node
 cd deploy
 
+# 停止之前的服务
+docker compose down
+
 # 使用cat命令将配置写入config.json
 cat >config.json <<EOF
 {
@@ -44,7 +47,7 @@ cat >config.json <<EOF
   "chain": {
     "enabled": true,
     "trail_head_blocks": 5,
-    "rpc_url": "http://127.0.0.1:8545",
+    "rpc_url": "https://base-rpc.publicnode.com",
     "registry_address": "0x3B1554f346DFe5c482Bb4BA31b880c1C18412170",
     "coordinator_address": "0x8D871Ef2826ac9001fB2e33fDD6379b6aaBF449c",
     "wallet": {
@@ -58,8 +61,8 @@ cat >config.json <<EOF
     }
   },
   "docker": {
-    "username": "username",
-    "password": "password"
+    "username": "${docker_hub_username}",
+    "password": "${docker_hub_password}"
   },
   "redis": {
     "host": "redis",
