@@ -3,13 +3,6 @@
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_allora.sh | bash -s -- [node_name]
 set -eu
 
-node_name=$1
-
-if [ -z "$node_name" ]; then
-    echo "缺少参数: node_name"
-    exit
-fi
-
 service_name=allora
 node_dir=$HOME/${service_name}_dir
 mkdir -p $node_dir
