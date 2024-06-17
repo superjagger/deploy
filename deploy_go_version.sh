@@ -19,7 +19,7 @@ if which go > /dev/null 2>&1; then
     echo "Go ${go_version}已经安装"
 else
     echo "Go ${go_version}未安装"
-    wget https://mirrors.aliyun.com/golang/go${go_version}.linux-amd64.tar.gz >deploy_go.log 2>&1
+    wget https://mirrors.aliyun.com/golang/go${go_version}.linux-amd64.tar.gz
     mkdir -p ${go_dir}
     go_tar=go${go_version}.linux-amd64.tar.gz
     # 检查文件是否存在
