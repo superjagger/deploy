@@ -77,7 +77,7 @@ fi
 cd run
 sed -i "s/miner_key = .*/miner_key = \"$private_key\"/" config.toml
 sed -i "s|blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = \"${rpc}\"|g" config.toml
-sed -i 's/log_sync_start_block_number = .*/log_sync_start_block_number = 403000/' config.toml
+sed -i 's/log_sync_start_block_number = .*/log_sync_start_block_number = 615000/' config.toml
 
 # 配置运行文件
 cd $og_dir
