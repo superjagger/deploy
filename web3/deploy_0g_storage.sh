@@ -115,5 +115,5 @@ sudo systemctl restart 0g_storage_node
 sudo systemctl status 0g_storage_node
 # sudo systemctl stop 0g_storage_node
 
-sleep 5
+sleep 10
 tail -n 100 "$(find $og_dir/0g-storage-node/run/log/ -type f -printf '%T+ %p\n' | sort -r | head -n 1 | cut -d' ' -f2-)" 
