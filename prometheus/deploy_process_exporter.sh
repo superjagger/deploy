@@ -1,5 +1,5 @@
 #!/bin/bash
-# curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/prometheus/deploy_process_exporter.sh | bash -s -- 
+# curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/prometheus/deploy_process_exporter.sh | bash -s -- "进程1" "进程2" "进程N"
 
 prometheus_dir=$HOME/prometheus
 process_dir=$prometheus_dir/process-exporter
