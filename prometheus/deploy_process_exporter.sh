@@ -24,5 +24,7 @@ cat >>$process_dir/config.yml<<EOF
 EOF
 done
 
+cat $process_dir/config.yml
+
 docker run -d -it -p 9256:9256 --privileged -v /proc:/host/proc -v $process_dir:/config --name=process-exporter --restart=always ncabatoff/process-exporter --procfs /host/proc -config.path /config/config.yml
 docker restart
