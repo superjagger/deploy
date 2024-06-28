@@ -12,15 +12,17 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 cd $process_dir
 cat >$process_dir/config.yml<<EOF
 process_names:
-  - name: "{{.Matches}}"
-    cmdline:
-    - '0gchaind'
-  - name: "{{.Matches}}"
-    cmdline:
-    - 'zgs_node'
-  - name: "{{.Matches}}"
-    cmdline:
-    - 'artelad'
 EOF
+
+
+# 遍历所有的命令行参数作为要监听的进程
+for arg in "$@"; do  
+cat >>$process_dir/config.yml<<EOF
+  - name: "{{.Matches}}"
+    cmdline:
+    - '$arg'
+EOF
+done
+
 docker run -d -it -p 9256:9256 --privileged -v /proc:/host/proc -v $process_dir:/config --name=process-exporter --restart=always ncabatoff/process-exporter --procfs /host/proc -config.path /config/config.yml
 docker restart
