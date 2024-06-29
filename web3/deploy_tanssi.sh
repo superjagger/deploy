@@ -53,7 +53,7 @@ if [[ -n $(docker ps -a -q -f "name=tanssi") ]]; then
 fi
 
 # 启动容器
-docker run -d --network="host" --name tanssi -v "$tanssi_data:/data" \
+docker run -d --network="host" --name tanssi --restart=always -v "$tanssi_data:/data" \
     -u $(id -u ${USER}):$(id -g ${USER}) \
     moondancelabs/tanssi \
     --chain=dancebox \
