@@ -102,7 +102,7 @@ sudo tee /lib/systemd/system/artelad.service >/dev/null <<EOF
 Description=artelad Service
 
 [Service]  
-CPUQuota=100%
+CPUQuota=200%
 User=root
 Type=simple
 WorkingDirectory=${artela_dir}
