@@ -93,10 +93,13 @@ SEEDS=""
 PEERS="5c9b1bc492aad27a0197a6d3ea3ec9296504e6fd@artela-testnet-peer.itrocket.net:30656,669fb71a6489b4fba0de5e53fcfd9f8e24cef292@207.180.212.162:26656,6ff8f4785934cf4b8ae27e28a5b041b1b271dbdd@75.119.153.252:45656,23ec079ed59a326f0e0a31dcab7e6e3165d45904@128.199.183.214:26656,b7cfd5e4d9bf7ee725c9ee8c3a86b84fdc44319c@43.242.96.234:26656,17c071b9815b680e5402158287658cee78114ccf@47.88.58.36:26656,bbf8ef70a32c3248a30ab10b2bff399e73c6e03c@65.21.198.100:23456,df31e029240ab2940cfd4df8f13617227fcf08d8@135.125.97.162:11656,3e57b70ff03e399a72eb53d0eca361af1786f07a@91.190.156.180:41656"
 sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.artelad/config/config.toml
 
+sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.artelad/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.artelad/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $HOME/.artelad/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.artelad/config/app.toml
+sed -i -e 's/max_num_inbound_peers = 40/max_num_inbound_peers = 100/' -e 's/max_num_outbound_peers = 10/max_num_outbound_peers = 100/' $HOME/.artelad/config/config.toml
 # 下载快照
-mv $HOME/.artelad/data/priv_validator_state.json $HOME/.artelad/priv_validator_state.json.backup
-curl -L https://snapshots.dadunode.com/artela/artela_latest_tar.lz4 | tar -I lz4 -xf - -C $HOME/.artelad/data
-mv $HOME/.artelad/priv_validator_state.json.backup $HOME/.artelad/data/priv_validator_state.json
+curl -L https://public-snapshot-storage-develop.s3.amazonaws.com/artela/artela_11822-1/snapshots/artela_9366339.tar.lz4 | tar -I lz4 -xf - -C $HOME/.artelad/data
 
 cd $artela_dir
 # 编写节点启动脚本
