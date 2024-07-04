@@ -38,9 +38,13 @@ if [ $clear -eq 1 ]; then
     rm -rf $run_node_sh
 fi
 
-if [ -f /lib/systemd/system/artelad.service ] && [ -f $HOME/go/bin/artelad ]; then
-    echo "已部署 artelad ，只进行服务重启..."
-    
+if [ -f /lib/systemd/system/artelad.service ]; then
+    echo "已部署 artelad ，只进行服务重启"
+
+    # 配置端口
+    sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:3458\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"$node_address\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:3460\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:3456\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":3466\"%" $HOME/.artelad/config/config.toml
+    sed -i -e "s%^address = \"tcp://0.0.0.0:1317\"%address = \"tcp://0.0.0.0:3417\"%; s%^address = \":8080\"%address = \":3480\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:3490\"%; s%^address = \"localhost:9091\"%address = \"0.0.0.0:3491\"%; s%:8545%:3445%; s%:8546%:3446%; s%:6065%:3465%" $HOME/.artelad/config/app.toml
+
     sudo systemctl start artelad
     echo "成功重启"
     exit
@@ -61,7 +65,7 @@ export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin # 将go的目录临时添加到�
 cd $artela_dir
 git clone https://github.com/artela-network/artela
 cd artela
-git checkout v0.4.7-rc6
+git checkout v0.4.7-rc7
 make install
 
 artelad config chain-id artela_11822-1
@@ -83,7 +87,7 @@ sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.artelad/
 
 # 下载快照
 mv $HOME/.artelad/data/priv_validator_state.json $HOME/.artelad/priv_validator_state.json.backup
-curl -L https://snapshots-testnet.nodejumper.io/artela-testnet/artela-testnet_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.artelad
+curl -L https://snapshots.dadunode.com/artela/artela_latest_tar.lz4 | tar -I lz4 -xf - -C $HOME/.artelad/data
 mv $HOME/.artelad/priv_validator_state.json.backup $HOME/.artelad/data/priv_validator_state.json
 
 cd $artela_dir
@@ -97,7 +101,7 @@ artelad start
 EOF
 
 # 写入服务
-sudo tee /lib/systemd/system/artelad.service >/dev/null <<EOF
+sudo cat >/lib/systemd/system/artelad.service <<EOF
 [Unit]
 Description=artelad Service
 
