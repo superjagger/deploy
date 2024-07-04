@@ -68,6 +68,14 @@ cd artela
 git checkout v0.4.7-rc7
 make install
 
+cd $HOME
+mkdir -p $HOME/.artelad
+cd $HOME/.artelad && mkdir libs && cd libs
+wget https://github.com/artela-network/artela/releases/download/v0.4.7-rc7/artelad_0.4.7_rc7_Linux_amd64.tar.gz
+tar -xzvf artelad_0.4.7_rc7_Linux_amd64.tar.gz
+rm artelad_0.4.7_rc7_Linux_amd64.tar.gz
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.artelad/libs
+
 artelad config chain-id artela_11822-1
 artelad init "$node_name" --chain-id artela_11822-1
 artelad config node $node_address
@@ -96,6 +104,7 @@ cat >$run_node_sh <<EOF
 source $HOME/.bash_profile
 go_dir=/usr/local/go_${go_version}
 export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$HOME/.artelad/libs
 # 启动节点
 artelad start
 EOF
