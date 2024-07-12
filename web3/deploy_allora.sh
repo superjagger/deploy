@@ -40,10 +40,11 @@ sed -i "s|- \"26656-26657:26656-26657\"|- \"36656-36657:26656-26657\"|" docker-c
 docker compose pull
 docker compose up -d
 
-echo "秘钥"
-cat $node_dir/allora-chain/data/data/sample_validator.account_info
-
+# 运行状态
 sleep 10
-# 状态
 curl -s http://localhost:36657/status | jq .
 docker logs -n 20 sample_validator
+
+sleep 10
+echo "秘钥"
+cat $node_dir/allora-chain/data/data/sample_validator.account_info
