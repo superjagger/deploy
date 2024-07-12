@@ -23,6 +23,8 @@ docker compose pull
 docker compose up -d
 
 sleep 10
+echo "查询秘钥"
+cat data/data/sample_validator.account_info
 # 状态
 curl -s http://localhost:36657/status | jq .
-docker logs -n 100 sample_validator
+docker logs -n 20 sample_validator
