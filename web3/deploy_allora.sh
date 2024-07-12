@@ -41,9 +41,9 @@ docker compose pull
 docker compose up -d
 
 echo "秘钥"
-cat data/validator0.account_info
+cat $node_dir/allora-chain/data/validator0.account_info
 
 sleep 10
 # 状态
 curl -s http://localhost:36657/status | jq .
-docker logs -n 20 sample_validator
+docker logs -n 20 validator0
