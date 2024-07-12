@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 部署命令行： curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_allora.sh | bash -s -- 
-set -eu
+# set -eu
 
 service_name=allora
 node_dir=$HOME/${service_name}_dir
@@ -22,5 +22,7 @@ sed -i "s|- \"26656-26657:26656-26657\"|- \"36656-36657:26656-26657\"|" docker-c
 docker compose pull
 docker compose up -d
 
+sleep 10
 # 状态
 curl -s http://localhost:36657/status | jq .
+docker logs -n 100 sample_validator
