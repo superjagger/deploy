@@ -8,23 +8,9 @@ if [ -z "$clear" ]; then
     clear=0
 fi
 
-if [ $clear -eq 1 ]; then
-    echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
-    sleep 1
-    echo "3"
-    sleep 1
-    echo "2"
-    sleep 1
-    echo "1"
-    sudo systemctl stop artelad
-    rm -rf $node_dir/artela
-fi
-
-
 service_name=allora
 node_dir=$HOME/${service_name}_dir
 mkdir -p $node_dir
-
 
 if [ $clear -eq 1 ]; then
     echo "本次脚本会删除原有数据，如果不想删除及时退出脚本"
