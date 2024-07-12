@@ -20,6 +20,8 @@ if [ $clear -eq 1 ]; then
     echo "2"
     sleep 1
     echo "1"
+    cd $HOME/allora_dir/allora-chain 
+    docker compose down
     rm -rf $node_dir/artela/allora-chain
 fi
 
