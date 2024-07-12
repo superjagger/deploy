@@ -34,7 +34,6 @@ if [ $clear -eq 1 ]; then
     echo "2"
     sleep 1
     echo "1"
-    sudo systemctl stop artelad
     rm -rf $node_dir/artela/allora-chain
 fi
 
