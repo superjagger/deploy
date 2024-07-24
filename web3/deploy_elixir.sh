@@ -10,6 +10,11 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 address=$1
 private_key=$2
 node_name=$3
+echo "参数"
+echo "address: $address"
+echo "private_key: $private_key"
+echo "node_name: $node_name"
+echo "开始部署"
 
 if [ -z "$node_name" ]; then
     echo "缺少参数"
