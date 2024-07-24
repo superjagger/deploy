@@ -10,8 +10,14 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 address=$1
 private_key=$2
 node_name=$3
+
+if [ -z "$node_name" ]; then
+    echo "缺少参数"
+    exit 1
+fi
+
 cd $node_dir
-cat > Dockerfile <<EOF
+cat >Dockerfile <<EOF
 FROM elixirprotocol/validator:testnet-2
 
 ENV ADDRESS=$address
