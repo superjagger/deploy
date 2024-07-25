@@ -12,4 +12,4 @@ curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docke
 
 # 安装shardeum
 cd $node_dir
-curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_shardeum_installer.sh | bash
+curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_shardeum_installer.sh | bash
