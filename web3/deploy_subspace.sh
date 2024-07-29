@@ -32,7 +32,7 @@ docker compose down
 cat >docker-compose.yaml <<EOF
 services:
   node:
-    image: ghcr.io/autonomys/node:
+    image: ghcr.io/autonomys/node:gemini-3h-2024-jul-26
     volumes:
       - node-data:/var/subspace:rw
     ports:
@@ -61,7 +61,7 @@ services:
     depends_on:
       node:
         condition: service_healthy
-    image: ghcr.io/autonomys/farmer:
+    image: ghcr.io/autonomys/farmer:gemini-3h-2024-jul-26
     volumes:
       - farmer-data:/var/subspace:rw
     ports:
@@ -78,6 +78,7 @@ services:
 volumes:
   node-data:
   farmer-data:            
+     
 EOF
 # 部署容器
 docker compose up -d
