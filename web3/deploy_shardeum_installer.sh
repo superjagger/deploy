@@ -654,3 +654,5 @@ To use the Command Line Interface:
 	3. Run "operator-cli --help" for commands
 
 EOF
+
+exit 0
