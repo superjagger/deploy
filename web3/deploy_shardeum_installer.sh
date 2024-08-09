@@ -116,6 +116,8 @@ echo "The base directory is set to: $input"
 # Replace leading tilde (~) with the actual home directory path
 NODEHOME="${input/#\~/$HOME}" # support ~ in path
 
+echo "地址：$NODEHOME"
+
 # Check all things that will be needed for this script to succeed like access to docker and docker-compose
 # If any check fails exit with a message on what the user needs to do to fix the problem
 command -v git >/dev/null 2>&1 || {
