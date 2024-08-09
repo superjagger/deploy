@@ -16,3 +16,4 @@ cd $node_dir
 echo "开始"
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_shardeum_installer.sh | bash
 echo "结束"
+exit 0
