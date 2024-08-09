@@ -547,6 +547,7 @@ git clone https://github.com/shardeum/validator-dashboard.git ${NODEHOME} || {
     exit 1
 }
 cd ${NODEHOME}
+git pull
 chmod a+x ./*.sh
 
 cat <<EOF
