@@ -10,9 +10,9 @@ mkdir -p $node_dir
 # 安装docker
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docker.sh | bash
 
-# 清空原有安装
 rm -rf ~/.shardeum
-
 # 安装shardeum
 cd $node_dir
+echo "开始"
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/deploy_shardeum_installer.sh | bash
+echo "结束"
