@@ -10,6 +10,7 @@ mkdir -p $node_dir
 # 安装docker
 curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/deploy_docker.sh | bash
 
+echo "删除原有数据"
 rm -rf ~/.shardeum
 # 安装shardeum
 cd $node_dir
