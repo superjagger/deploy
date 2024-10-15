@@ -24,7 +24,7 @@ cd $quili_dir
 echo "备份原有文件"
 rm -rf ceremonyclient
 mv ceremonyclient ceremonyclient_$(date +"%Y%m%d_%H%M%S") 
-git clone -b release-cdn https://git.dadunode.com/smeb_y/ceremonyclient.git
+git clone -b v1.4.20-p1 https://github.com/QuilibriumNetwork/ceremonyclient.git
 
 #手动下载更新quil node二进制文件
 cd $quili_dir/ceremonyclient/node/
