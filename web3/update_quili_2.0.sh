@@ -20,7 +20,6 @@ export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 # 下载最新分支
 cd $quili_dir
 echo "备份原有文件"
-rm -rf ceremonyclient
 mv ceremonyclient ceremonyclient_$(date +"%Y%m%d_%H%M%S") 
 git clone -b v1.4.20-p1 https://github.com/QuilibriumNetwork/ceremonyclient.git
 
