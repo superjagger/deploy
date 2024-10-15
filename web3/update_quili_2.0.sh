@@ -2,6 +2,8 @@
 
 # curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/update_quili_2.0.sh | bash
 
+sudo systemctl stop ceremonyclient
+
 # 文件地址
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
@@ -57,4 +59,9 @@ export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
 ./node-2.0.0.3-linux-amd64
 EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable ceremonyclient
+sudo systemctl restart ceremonyclient
+sudo systemctl status ceremonyclient
 
