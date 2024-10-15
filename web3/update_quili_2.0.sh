@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# curl -sSL https://raw.githubusercontent.com/superjagger/deploy/main/web3/update_quili_2.0.sh | bash
+
 # 文件地址
 quili_dir=$HOME/quili_dir
 run_node_sh=$quili_dir/run_ceremonyclient_node.sh
@@ -17,7 +19,9 @@ export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 
 # 下载最新分支
 cd $quili_dir
+echo "备份原有文件"
 rm -rf ceremonyclient
+mv ceremonyclient ceremonyclient_$(date +"%Y%m%d_%H%M%S") 
 git clone -b release-cdn https://git.dadunode.com/smeb_y/ceremonyclient.git
 
 #手动下载更新quil node二进制文件
@@ -42,9 +46,9 @@ done
 chmod +x qclient-2*
 
 #查询本机的Effective seniority score
-cd $quili_dir/ceremonyclient/node/
-echo "查询本机的Effective seniority score"
-./qclient-2.0.0.2-linux-amd64 config prover merge --dry-run .config/ .config/
+# cd $quili_dir/ceremonyclient/node/
+# echo "查询本机的Effective seniority score"
+# ./qclient-2.0.0.2-linux-amd64 config prover merge --dry-run .config/ .config/
 
 # 编写节点启动脚本
 cat >$run_node_sh <<EOF
@@ -53,3 +57,4 @@ export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
 ./node-2.0.0.3-linux-amd64
 EOF
+
