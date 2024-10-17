@@ -18,10 +18,10 @@ go_dir=/usr/local/go_${go_version}
 export PATH=$PATH:${go_dir}/go/bin:$HOME/go/bin
 
 # 下载最新分支
-cd $quili_dir
-echo "备份原有文件"
-mv ceremonyclient ceremonyclient_$(date +"%Y%m%d_%H%M%S") 
-git clone -b v1.4.20-p1 https://github.com/QuilibriumNetwork/ceremonyclient.git
+#cd $quili_dir
+#echo "备份原有文件"
+#mv ceremonyclient ceremonyclient_$(date +"%Y%m%d_%H%M%S") 
+#git clone -b v1.4.20-p1 https://github.com/QuilibriumNetwork/ceremonyclient.git
 
 #手动下载更新quil node二进制文件
 cd $quili_dir/ceremonyclient/node/
