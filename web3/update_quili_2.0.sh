@@ -54,7 +54,7 @@ cat >$run_node_sh <<EOF
 go_dir=/usr/local/go_${go_version}
 export PATH=\$PATH:\${go_dir}/go/bin:\$HOME/go/bin
 cd $quili_dir/ceremonyclient/node
-./node-2.0.0.3-linux-amd64
+./node-2.0.0.7-linux-amd64
 EOF
 
 sudo systemctl daemon-reload
